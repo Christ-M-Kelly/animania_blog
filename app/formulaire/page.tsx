@@ -22,7 +22,7 @@ export default function Home() {
       const response = await fetch("/api/users", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
+        body: JSON.stringify(formData), // Les données du formulaire sont envoyées sous forme de chaîne JSON.
       });
 
       const result = await response.json();
@@ -38,6 +38,8 @@ export default function Home() {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
+    console.log(name, value);
+     // Met à jour l'état `formData` en conservant les autres valeurs inchangées et en modifiant seulement le champ actuel.s
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
