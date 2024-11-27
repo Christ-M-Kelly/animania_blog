@@ -1,0 +1,55 @@
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  createdAt   DateTime @default(now())
+  email       String   @unique
+  name        String
+  password    String   // Pour la connexion
+  role        Role     @default(USER)
+  posts       Post[]
+  comments    Comment[]
+}
+
+model Post {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  published   Boolean  @default(false)
+  title       String
+  content     String
+  slug        String   @unique
+  views       Int      @default(0) // Pour le dashboard
+  author      User     @relation(fields: [authorId], references: [id])
+  authorId    String   @db.ObjectId
+  comments    Comment[]
+}
+
+model Comment {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  createdAt   DateTime @default(now())
+  content     String
+  author      User     @relation(fields: [authorId], references: [id])
+  authorId    String   @db.ObjectId
+  post        Post     @relation(fields: [postId], references: [id])
+  postId      String   @db.ObjectId
+}
+
+model ViewStats {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  date        DateTime @default(now())
+  dailyViews  Int
+  monthlyViews Int
+}
+
+enum Role {
+  USER
+  ADMIN
+}
