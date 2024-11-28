@@ -1,4 +1,4 @@
-import Footer from "@/components/Footer";
+import Footer from "../src/components/Footer";
 import { prisma } from "./db/prisma";
 
 export default async function Home() {

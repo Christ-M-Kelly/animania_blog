@@ -1,6 +1,3 @@
-<<<<<<< HEAD
-"use strict";(()=>{var e={};e.id=220,e.ids=[220],e.modules={361:e=>{e.exports=require("next/dist/compiled/next-server/pages.runtime.prod.js")},2015:e=>{e.exports=require("react")},8732:e=>{e.exports=require("react/jsx-runtime")},3873:e=>{e.exports=require("path")}};var r=require("../webpack-runtime.js");r.C(e);var s=e=>r(r.s=e),t=r.X(0,[627],()=>s(7627));module.exports=t})();
-=======
 "use strict";
 /*
  * ATTENTION: An "eval-source-map" devtool has been used.
@@ -63,8 +60,7 @@ module.exports = require("path");
 var __webpack_require__ = require("../webpack-runtime.js");
 __webpack_require__.C(exports);
 var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
-var __webpack_exports__ = __webpack_require__.X(0, ["vendor-chunks/@swc+helpers@0.5.13","vendor-chunks/next@15.0.3_react-dom@19.0.0-rc-66855b96-20241106_react@19.0.0-rc-66855b96-20241106__react@19.0.0-rc-66855b96-20241106","vendor-chunks/next"], () => (__webpack_exec__("./node_modules/next/dist/pages/_document.js")));
+var __webpack_exports__ = __webpack_require__.X(0, ["vendor-chunks/next@15.0.3_react-dom@18.3.1_react@18.3.1__react@18.3.1","vendor-chunks/@swc+helpers@0.5.13"], () => (__webpack_exec__("./node_modules/.pnpm/next@15.0.3_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/pages/_document.js")));
 module.exports = __webpack_exports__;
 
 })();
->>>>>>> M1
