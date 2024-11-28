@@ -22,8 +22,13 @@
 /******/ 		}
 /******/ 		// Create a new module (and put it into the cache)
 /******/ 		var module = __webpack_module_cache__[moduleId] = {
+<<<<<<< HEAD
 /******/ 			id: moduleId,
 /******/ 			loaded: false,
+=======
+/******/ 			// no module.id needed
+/******/ 			// no module.loaded needed
+>>>>>>> M1
 /******/ 			exports: {}
 /******/ 		};
 /******/ 	
@@ -36,9 +41,12 @@
 /******/ 			if(threw) delete __webpack_module_cache__[moduleId];
 /******/ 		}
 /******/ 	
+<<<<<<< HEAD
 /******/ 		// Flag the module as loaded
 /******/ 		module.loaded = true;
 /******/ 	
+=======
+>>>>>>> M1
 /******/ 		// Return the exports of the module
 /******/ 		return module.exports;
 /******/ 	}
@@ -47,11 +55,14 @@
 /******/ 	__webpack_require__.m = __webpack_modules__;
 /******/ 	
 /************************************************************************/
+<<<<<<< HEAD
 /******/ 	/* webpack/runtime/amd options */
 /******/ 	(() => {
 /******/ 		__webpack_require__.amdO = {};
 /******/ 	})();
 /******/ 	
+=======
+>>>>>>> M1
 /******/ 	/* webpack/runtime/compat get default export */
 /******/ 	(() => {
 /******/ 		// getDefaultExport function for compatibility with non-harmony modules
@@ -64,6 +75,7 @@
 /******/ 		};
 /******/ 	})();
 /******/ 	
+<<<<<<< HEAD
 /******/ 	/* webpack/runtime/create fake namespace object */
 /******/ 	(() => {
 /******/ 		var getProto = Object.getPrototypeOf ? (obj) => (Object.getPrototypeOf(obj)) : (obj) => (obj.__proto__);
@@ -94,6 +106,8 @@
 /******/ 		};
 /******/ 	})();
 /******/ 	
+=======
+>>>>>>> M1
 /******/ 	/* webpack/runtime/define property getters */
 /******/ 	(() => {
 /******/ 		// define getter functions for harmony exports
@@ -128,11 +142,14 @@
 /******/ 		};
 /******/ 	})();
 /******/ 	
+<<<<<<< HEAD
 /******/ 	/* webpack/runtime/getFullHash */
 /******/ 	(() => {
 /******/ 		__webpack_require__.h = () => ("562e753819a958ca")
 /******/ 	})();
 /******/ 	
+=======
+>>>>>>> M1
 /******/ 	/* webpack/runtime/hasOwnProperty shorthand */
 /******/ 	(() => {
 /******/ 		__webpack_require__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop))
@@ -149,6 +166,7 @@
 /******/ 		};
 /******/ 	})();
 /******/ 	
+<<<<<<< HEAD
 /******/ 	/* webpack/runtime/node module decorator */
 /******/ 	(() => {
 /******/ 		__webpack_require__.nmd = (module) => {
@@ -158,6 +176,8 @@
 /******/ 		};
 /******/ 	})();
 /******/ 	
+=======
+>>>>>>> M1
 /******/ 	/* webpack/runtime/startup entrypoint */
 /******/ 	(() => {
 /******/ 		__webpack_require__.X = (result, chunkIds, fn) => {

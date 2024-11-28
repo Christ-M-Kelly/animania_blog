@@ -6,6 +6,7 @@
       "static/css/app/layout.css",
       "static/chunks/app/layout.js"
     ],
+<<<<<<< HEAD
     "/a-propos/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
@@ -16,6 +17,12 @@
       "static/chunks/main-app.js",
       "static/css/app/connexion/page.css",
       "static/chunks/app/connexion/page.js"
+=======
+    "/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/page.js"
+>>>>>>> M1
     ]
   }
 }

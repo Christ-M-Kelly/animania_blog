@@ -89,6 +89,7 @@
 /******/ 		};
 /******/ 	})();
 /******/ 	
+<<<<<<< HEAD
 /******/ 	/* webpack/runtime/compat get default export */
 /******/ 	(() => {
 /******/ 		// getDefaultExport function for compatibility with non-harmony modules
@@ -101,6 +102,8 @@
 /******/ 		};
 /******/ 	})();
 /******/ 	
+=======
+>>>>>>> M1
 /******/ 	/* webpack/runtime/create fake namespace object */
 /******/ 	(() => {
 /******/ 		var getProto = Object.getPrototypeOf ? (obj) => (Object.getPrototypeOf(obj)) : (obj) => (obj.__proto__);
@@ -190,7 +193,11 @@
 /******/ 	
 /******/ 	/* webpack/runtime/getFullHash */
 /******/ 	(() => {
+<<<<<<< HEAD
 /******/ 		__webpack_require__.h = () => ("ead5e74222a1d2fe")
+=======
+/******/ 		__webpack_require__.h = () => ("a2086b8575349265")
+>>>>>>> M1
 /******/ 	})();
 /******/ 	
 /******/ 	/* webpack/runtime/global */
