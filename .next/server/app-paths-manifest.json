@@ -1,0 +1,10 @@
+{
+  "/users/route": "app/users/route.js",
+  "/favicon.ico/route": "app/favicon.ico/route.js",
+  "/_not-found/page": "app/_not-found/page.js",
+  "/a-propos/page": "app/a-propos/page.js",
+  "/formulaire/page": "app/formulaire/page.js",
+  "/afficher_donnees/page": "app/afficher_donnees/page.js",
+  "/page": "app/page.js",
+  "/connexion/page": "app/connexion/page.js"
+}
