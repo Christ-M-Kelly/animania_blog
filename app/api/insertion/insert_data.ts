@@ -5,7 +5,16 @@ import { NextResponse } from "next/server";
 export async function POST(req: Request) {
   try {
     const body = await req.json();
-    const { name, email, password, role, postTitle, postContent, postSlug, commentContent } = body;
+    const {
+      name,
+      email,
+      password,
+      role,
+      postTitle,
+      postContent,
+      postSlug,
+      commentContent,
+    } = body;
 
     // Créer un utilisateur avec un rôle et un post associé
     const user = await prisma.user.create({
@@ -22,6 +31,9 @@ export async function POST(req: Request) {
           },
         },
       },
+      include: {
+        posts: true,
+      },
     });
 
     // Ajouter un commentaire associé au post et à l'utilisateur
@@ -34,10 +46,21 @@ export async function POST(req: Request) {
       },
     });
 
-    return NextResponse.json({ message: "Données insérées avec succès", user, comment });
+    return NextResponse.json({
+      message: "Données insérées avec succès",
+      user,
+      comment,
+    });
   } catch (error) {
+    const errorMessage =
+      error instanceof Error
+        ? error.message
+        : "Une erreur inconnue est survenue";
     return NextResponse.json(
-      { error: "Erreur lors de l'insertion des données", details: error.message },
+      {
+        error: "Erreur lors de la récupération des données",
+        details: errorMessage,
+      },
       { status: 500 }
     );
   }
