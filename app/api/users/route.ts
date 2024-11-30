@@ -1,11 +1,16 @@
 import { prisma } from "@/app/db/prisma";
 import { NextResponse } from "next/server";
 
+<<<<<<< HEAD
 // methode post et get
+=======
+// methode post et get 
+>>>>>>> bbcd9e87e0cf257956fbbf107e7444eb9bb7cc1f
 
 export async function POST(req: Request) {
   try {
     const body = await req.json();
+<<<<<<< HEAD
     const {
       name,
       email,
@@ -16,6 +21,9 @@ export async function POST(req: Request) {
       postSlug,
       commentContent,
     } = body;
+=======
+    const { name, email, password, role, postTitle, postContent, postSlug, commentContent } = body;
+>>>>>>> bbcd9e87e0cf257956fbbf107e7444eb9bb7cc1f
 
     // Créer un utilisateur avec un post
     const user = await prisma.user.create({
@@ -51,6 +59,7 @@ export async function POST(req: Request) {
       },
     });
 
+<<<<<<< HEAD
     return NextResponse.json({
       message: "Données insérées avec succès",
       user,
@@ -64,11 +73,22 @@ export async function POST(req: Request) {
         error: "Erreur lors de l'insertion des données",
         details: message,
       },
+=======
+    return NextResponse.json({ message: "Données insérées avec succès", user, comment });
+  } catch (error: any) {
+    console.error("Erreur Prisma :", error.message);
+    return NextResponse.json(
+      { error: "Erreur lors de l'insertion des données", details: error.message },
+>>>>>>> bbcd9e87e0cf257956fbbf107e7444eb9bb7cc1f
       { status: 500 }
     );
   }
 }
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> bbcd9e87e0cf257956fbbf107e7444eb9bb7cc1f
 export async function GET() {
   try {
     // Récupérer tous les utilisateurs avec leurs relations (posts et commentaires)
@@ -84,6 +104,7 @@ export async function GET() {
     });
 
     // Structurer les données si nécessaire
+<<<<<<< HEAD
     const structuredData = users.map(
       (user: {
         id: string;
@@ -137,6 +158,35 @@ export async function GET() {
         error: "Erreur lors de la récupération des données",
         details: message,
       },
+=======
+    const structuredData = users.map((user) => ({
+      id: user.id,
+      name: user.name,
+      email: user.email,
+      role: user.role,
+      posts: user.posts.map((post) => ({
+        id: post.id,
+        title: post.title,
+        content: post.content,
+        slug: post.slug,
+        comments: post.comments.map((comment) => ({
+          id: comment.id,
+          content: comment.content,
+        })),
+      })),
+      comments: user.comments.map((comment) => ({
+        id: comment.id,
+        content: comment.content,
+        postId: comment.postId,
+      })),
+    }));
+
+    return NextResponse.json({ users: structuredData });
+  } catch (error: any) {
+    console.error("Erreur lors de la récupération des données :", error.message);
+    return NextResponse.json(
+      { error: "Erreur lors de la récupération des données", details: error.message },
+>>>>>>> bbcd9e87e0cf257956fbbf107e7444eb9bb7cc1f
       { status: 500 }
     );
   }

@@ -36,6 +36,7 @@
       "static/chunks/main-app-e63e056b7c517193.js",
       "static/chunks/app/formulaire/page-892ff0e1cfa68478.js"
     ],
+<<<<<<< HEAD
     "/a-propos/page": [
       "static/chunks/webpack-c665158a6af5d43b.js",
       "static/chunks/4bd1b696-7222c2acdd121abc.js",
@@ -58,6 +59,12 @@
       "static/chunks/517-8f529cb7a359e118.js",
       "static/chunks/main-app-e63e056b7c517193.js",
       "static/chunks/app/afficher_donnees/page-80345d05cdf5d07f.js"
+=======
+    "/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/page.js"
+>>>>>>> bbcd9e87e0cf257956fbbf107e7444eb9bb7cc1f
     ],
     "/connexion/page": [
       "static/chunks/webpack-c665158a6af5d43b.js",

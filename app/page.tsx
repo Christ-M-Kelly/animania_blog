@@ -1,5 +1,6 @@
-import { prisma } from "./db/prisma";
 import Footer from "../src/components/Footer";
+import { prisma } from "./db/prisma";
+
 export default async function Home() {
   const allUsers = await prisma.user.findMany({
     select: { name: true },

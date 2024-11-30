@@ -30,8 +30,8 @@ model Post {
   author      User     @relation(fields: [authorId], references: [id])
   authorId    String   @db.ObjectId
   comments    Comment[]
-  category   Category?  @relation(fields: [categoryId], references: [id])
-  categoryId String?    @db.ObjectId
+  category    Category? @relation(fields: [categoryId], references: [id])
+  categoryId  String?   @db.ObjectId
 }
 
 model Comment {
@@ -51,15 +51,12 @@ model ViewStats {
   monthlyViews Int
 }
 
-
-
 model Category {
   id          String   @id @default(auto()) @map("_id") @db.ObjectId
   name        String   @unique
   description String?
   posts       Post[]
 }
-
 
 enum Role {
   USER

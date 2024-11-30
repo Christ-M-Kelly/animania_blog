@@ -31,15 +31,13 @@ export default function Home() {
       } else {
         setMessage(result.error || "Une erreur est survenue.");
       }
-    } catch {
+    } catch (error) {
       setMessage("Erreur lors de l'envoi des données.");
     }
   };
 
   const handleChange = (
-    e: React.ChangeEvent<
-      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
-    >
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     const { name, value } = e.target;
     console.log(name, value);
