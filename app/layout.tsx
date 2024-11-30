@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
-import ScrollToTop from "@/components/ui/ScrollToTop";
+import ScrollToTop from "../src/components/ui/ScrollToTop";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
