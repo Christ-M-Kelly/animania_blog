@@ -1,12 +1,4 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
-// File: C:\Users\SebastienGUELY\Documents\Projets\Animania\animania_blog\app\a-propos\page.tsx
-=======
-// File: C:\Users\GeremyDHELLOT\animania_blog\app\a-propos\page.tsx
->>>>>>> origin/G1
-=======
-// File: C:\Users\Moayé Kelly\animania_blog\app\a-propos\page.tsx
->>>>>>> 9112ca159c68c027175d77d96d42d855e05212dc
+// File: C:\Users\mehdi\animania_blog\app\a-propos\page.tsx
 import * as entry from '../../../../app/a-propos/page.js'
 import type { ResolvingMetadata, ResolvingViewport } from 'next/dist/lib/metadata/types/metadata-interface.js'
 
