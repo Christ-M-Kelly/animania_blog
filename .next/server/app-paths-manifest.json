@@ -1,5 +1,6 @@
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
   "/favicon.ico/route": "app/favicon.ico/route.js",
 <<<<<<< HEAD
 =======
@@ -7,7 +8,17 @@
   "/_not-found/page": "app/_not-found/page.js",
 >>>>>>> origin/G1
   "/page": "app/page.js",
+=======
+  "/api/users/route": "app/api/users/route.js",
+  "/users/route": "app/users/route.js",
+  "/favicon.ico/route": "app/favicon.ico/route.js",
+  "/_not-found/page": "app/_not-found/page.js",
+>>>>>>> 9112ca159c68c027175d77d96d42d855e05212dc
   "/connexion/page": "app/connexion/page.js",
->>>>>>> c6e7645d723791fa54808298a40f6f223851522a
-  "/a-propos/page": "app/a-propos/page.js"
+  "/a-propos/page": "app/a-propos/page.js",
+  "/formulaire/page": "app/formulaire/page.js",
+  "/afficher_donnees/page": "app/afficher_donnees/page.js",
+  "/formulaire_inscription/page": "app/formulaire_inscription/page.js",
+  "/formulaire_connexion/page": "app/formulaire_connexion/page.js",
+  "/page": "app/page.js"
 }
