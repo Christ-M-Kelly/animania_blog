@@ -15,8 +15,13 @@ export async function GET() {
 
     return NextResponse.json({ users });
   } catch (error) {
+    const errorMessage =
+      error instanceof Error ? error.message : "Erreur inconnue";
     return NextResponse.json(
-      { error: "Erreur lors de la récupération des données", details: error.message },
+      {
+        error: "Erreur lors de la récupération des données",
+        details: errorMessage,
+      },
       { status: 500 }
     );
   }

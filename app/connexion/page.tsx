@@ -7,7 +7,7 @@ import C_Footer from "./C_Footer";
 export default function Connexion() {
   return (
     <div>
-      <main className="min-h-screen flex flex-col items-center pt-32 pb-32 bg-gradient-to-b from-green-50 to-green-100 relative">
+      <main className="min-h-screen flex flex-col items-center pt-32 pb-32 bg-gradient-to-b from-green-100 to-green-300 relative">
         <div className="bg-white p-6 sm:p-8 md:p-20 rounded-xl shadow-2xl w-[90%] sm:w-[30rem] md:w-[35rem] lg:w-[40rem] backdrop-blur-sm bg-opacity-90 relative z-10">
           <h2 className="text-2xl sm:text-3xl font-bold text-center mb-6 sm:mb-8 text-green-800">
             Connexion

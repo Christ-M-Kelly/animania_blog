@@ -1,4 +1,12 @@
-// File: C:\Users\mehdi\animania_blog\app\layout.tsx
+<<<<<<< HEAD
+<<<<<<< HEAD
+// File: C:\Users\SebastienGUELY\Documents\Projets\Animania\animania_blog\app\layout.tsx
+=======
+// File: C:\Users\GeremyDHELLOT\animania_blog\app\layout.tsx
+>>>>>>> origin/G1
+=======
+// File: C:\Users\Moayé Kelly\animania_blog\app\layout.tsx
+>>>>>>> 9112ca159c68c027175d77d96d42d855e05212dc
 import * as entry from '../../../app/layout.js'
 import type { ResolvingMetadata, ResolvingViewport } from 'next/dist/lib/metadata/types/metadata-interface.js'
 

@@ -1,12 +1,21 @@
 import { prisma } from "@/app/db/prisma";
 import { NextResponse } from "next/server";
 
-// methode post et get 
+// methode post et get
 
 export async function POST(req: Request) {
   try {
     const body = await req.json();
-    const { name, email, password, role, postTitle, postContent, postSlug, commentContent } = body;
+    const {
+      name,
+      email,
+      password,
+      role,
+      postTitle,
+      postContent,
+      postSlug,
+      commentContent,
+    } = body;
 
     // Créer un utilisateur avec un post
     const user = await prisma.user.create({
@@ -42,16 +51,25 @@ export async function POST(req: Request) {
       },
     });
 
-    return NextResponse.json({ message: "Données insérées avec succès", user, comment });
-  } catch (error: any) {
-    console.error("Erreur Prisma :", error.message);
+    return NextResponse.json({
+      message: "Données insérées avec succès",
+      user,
+      comment,
+    });
+  } catch (error: unknown) {
+    console.error(
+      "Erreur Prisma :",
+      error instanceof Error ? error.message : String(error)
+    );
     return NextResponse.json(
-      { error: "Erreur lors de l'insertion des données", details: error.message },
+      {
+        error: "Erreur lors de l'insertion des données",
+        details: error instanceof Error ? error.message : String(error),
+      },
       { status: 500 }
     );
   }
 }
-
 
 export async function GET() {
   try {
@@ -68,33 +86,61 @@ export async function GET() {
     });
 
     // Structurer les données si nécessaire
-    const structuredData = users.map((user) => ({
-      id: user.id,
-      name: user.name,
-      email: user.email,
-      role: user.role,
-      posts: user.posts.map((post) => ({
-        id: post.id,
-        title: post.title,
-        content: post.content,
-        slug: post.slug,
-        comments: post.comments.map((comment) => ({
+    const structuredData = users.map(
+      (user: {
+        id: string;
+        name: string;
+        email: string;
+        role: string;
+        posts: {
+          id: string;
+          title: string;
+          content: string;
+          slug: string;
+          comments: {
+            id: string;
+            content: string;
+          }[];
+        }[];
+        comments: {
+          id: string;
+          content: string;
+          postId: string;
+        }[];
+      }) => ({
+        id: user.id,
+        name: user.name,
+        email: user.email,
+        role: user.role,
+        posts: user.posts.map((post) => ({
+          id: post.id,
+          title: post.title,
+          content: post.content,
+          slug: post.slug,
+          comments: post.comments.map((comment) => ({
+            id: comment.id,
+            content: comment.content,
+          })),
+        })),
+        comments: user.comments.map((comment) => ({
           id: comment.id,
           content: comment.content,
+          postId: comment.postId,
         })),
-      })),
-      comments: user.comments.map((comment) => ({
-        id: comment.id,
-        content: comment.content,
-        postId: comment.postId,
-      })),
-    }));
+      })
+    );
 
     return NextResponse.json({ users: structuredData });
-  } catch (error: any) {
-    console.error("Erreur lors de la récupération des données :", error.message);
+  } catch (error: unknown) {
+    console.error(
+      "Erreur Prisma :",
+      error instanceof Error ? error.message : String(error)
+    );
     return NextResponse.json(
-      { error: "Erreur lors de la récupération des données", details: error.message },
+      {
+        error: "Erreur lors de la récupération des données",
+        details: error instanceof Error ? error.message : String(error),
+      },
       { status: 500 }
     );
   }
