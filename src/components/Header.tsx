@@ -13,7 +13,7 @@ export default function Header (){
             href: "/a-propos",
         },
         {
-            name: "Blogs",
+            name: "Posts",
             href: ""
         },
         {
@@ -22,26 +22,28 @@ export default function Header (){
         }
     ];
     return (
-        <header className="bg-gradient-to-b from-green-500 to-green-300">
-            <div>
-                <Image src="/images/logo_rbg.png" />
-            </div>
-            <div>
-                <nav>
-                    <ul className="flex space-x-4">
-                        {
-                            menu_navigation.map((link)=> 
-                                (
-                                <li key={link.name}>
-                                    <Link href={link.href}>
-                                        {link.name}
-                                    </Link>
-                                </li> 
+        <header className="bg-gradient-to-b from-green-500 to-green-400">
+            <div className="container mx-auto flex items-center justify-between py-1">
+                <div className="flex flex-row items-center justify-between">
+                    <Image src="/images/logo_rbg.png" width={100} height={100} alt="logo = image d'un chien et d'un chat" className="flex items-start" />
+                </div>
+                <div>
+                    <nav>
+                        <ul className="flex flex-row space-x-16">
+                            {
+                                menu_navigation.map((link)=> 
+                                    (
+                                    <li key={link.name}>
+                                        <Link href={link.href}>
+                                            {link.name}
+                                        </Link>
+                                    </li> 
+                                    )
                                 )
-                            )
-                        }
-                    </ul>
-                </nav>
+                            }
+                        </ul>
+                    </nav>
+                </div>
             </div>
         </header>
     );
