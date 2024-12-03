@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 // File: C:\Users\SebastienGUELY\Documents\Projets\Animania\animania_blog\app\layout.tsx
+=======
+// File: C:\Users\GeremyDHELLOT\animania_blog\app\layout.tsx
+>>>>>>> origin/G1
 import * as entry from '../../../app/layout.js'
 import type { ResolvingMetadata, ResolvingViewport } from 'next/dist/lib/metadata/types/metadata-interface.js'
 
