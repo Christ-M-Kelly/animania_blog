@@ -14,19 +14,33 @@
     "/formulaire_inscription/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
+<<<<<<< HEAD
       "static/css/app/formulaire_inscription/page.css",
+=======
+>>>>>>> origin/main
       "static/chunks/app/formulaire_inscription/page.js"
     ],
     "/formulaire_connexion/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
+<<<<<<< HEAD
       "static/css/app/formulaire_connexion/page.css",
+=======
+>>>>>>> origin/main
       "static/chunks/app/formulaire_connexion/page.js"
     ],
     "/a-propos/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
       "static/chunks/app/a-propos/page.js"
+<<<<<<< HEAD
+=======
+    ],
+    "/_not-found/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/_not-found/page.js"
+>>>>>>> origin/main
     ]
   }
 }
