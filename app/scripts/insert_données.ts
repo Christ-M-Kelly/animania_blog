@@ -18,6 +18,11 @@ async function main() {
               create: [
                 {
                   content: "Félicitations pour votre premier article !",
+                  author: {
+                    connect: {
+                      email: "alice@example.com",
+                    },
+                  },
                 },
               ],
             },
