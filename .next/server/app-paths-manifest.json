@@ -1,6 +1,5 @@
 {
   "/formulaire_connexion/page": "app/formulaire_connexion/page.js",
   "/a-propos/page": "app/a-propos/page.js",
-  "/Contact/page": "app/Contact/page.js",
   "/formulaire_inscription/page": "app/formulaire_inscription/page.js"
 }
