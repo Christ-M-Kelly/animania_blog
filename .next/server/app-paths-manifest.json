@@ -1,6 +1,4 @@
 {
-  "/_not-found/page": "app/_not-found/page.js",
-  "/favicon.ico/route": "app/favicon.ico/route.js",
   "/formulaire_inscription/page": "app/formulaire_inscription/page.js",
   "/formulaire_connexion/page": "app/formulaire_connexion/page.js",
   "/a-propos/page": "app/a-propos/page.js"
