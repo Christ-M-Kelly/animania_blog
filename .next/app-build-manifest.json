@@ -14,11 +14,13 @@
     "/formulaire_inscription/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
+      "static/css/app/formulaire_inscription/page.css",
       "static/chunks/app/formulaire_inscription/page.js"
     ],
     "/formulaire_connexion/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
+      "static/css/app/formulaire_connexion/page.css",
       "static/chunks/app/formulaire_connexion/page.js"
     ],
     "/a-propos/page": [
