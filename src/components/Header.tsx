@@ -88,7 +88,7 @@ export default function Header() {
             </>
           ) : (
             <Link
-              href="/connexion" // Lien vers la page de connexion
+              href="/formulaire_connexion" // Lien vers la page de connexion
               className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-all duration-300 ml-[-500px]"
             >
               Se connecter
