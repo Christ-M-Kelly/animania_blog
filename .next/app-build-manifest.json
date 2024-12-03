@@ -17,10 +17,37 @@
       "static/css/app/connexion/page.css",
       "static/chunks/app/connexion/page.js"
     ],
-    "/_not-found/page": [
+    "/api/auth/login/route": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/_not-found/page.js"
+      "static/chunks/app/api/auth/login/route.js"
+    ],
+    "/formulaire/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/formulaire/page.js"
+    ],
+    "/formulaire_inscription/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/css/app/formulaire_inscription/page.css",
+      "static/chunks/app/formulaire_inscription/page.js"
+    ],
+    "/formulaire_connexion/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/css/app/formulaire_connexion/page.css",
+      "static/chunks/app/formulaire_connexion/page.js"
+    ],
+    "/a-propos/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/a-propos/page.js"
+    ],
+    "/Contact/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/Contact/page.js"
     ]
   }
 }
