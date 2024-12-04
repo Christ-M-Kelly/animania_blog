@@ -1,24 +1,43 @@
+"use client";
+
 import Link from "next/link";
 import Image from "next/image";
-import jwt_decode from "jwt-decode";
+import { jwtDecode } from "jwt-decode";
+import { useState, useEffect } from "react";
 
-export default function Header() {
+interface HeaderProps {
+  className?: string;
+}
+
+// Ajouter cette interface
+interface DecodedToken {
+  exp: number;
+}
+
+export default function Header({ className }: HeaderProps) {
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
   // Fonction pour vérifier si le token est valide
   const isTokenValid = () => {
-    const token = typeof window !== "undefined" ? localStorage.getItem("token") : null;
+    if (!isClient) return false;
+    const token = localStorage.getItem("token");
     if (token) {
       try {
-        const decodedToken: any = jwt_decode(token);
-        const currentTime = Math.floor(Date.now() / 1000); // Temps actuel en secondes
-        return decodedToken.exp > currentTime; // Vérifie si le token est expiré
-      } catch (error) {
-        return false; // Si une erreur se produit, le token est invalide
+        const decodedToken: DecodedToken = jwtDecode(token);
+        const currentTime = Math.floor(Date.now() / 1000);
+        return decodedToken.exp > currentTime;
+      } catch {
+        return false;
       }
     }
     return false;
   };
 
-  const userName = typeof window !== "undefined" ? localStorage.getItem("userName") : null;
+  const userName = isClient ? localStorage.getItem("userName") : null;
 
   // Vérification de l'état de l'authentification
   const isAuthenticated = isTokenValid();
@@ -50,7 +69,9 @@ export default function Header() {
   };
 
   return (
-    <header className="bg-gradient-to-b from-green-500 to-green-400">
+    <header
+      className={`bg-gradient-to-b from-green-500 to-green-400 ${className}`}
+    >
       <div className="container mx-auto flex items-center justify-between py-2">
         {/* Section gauche avec logo */}
         <div className="flex items-center space-x-4">
@@ -78,18 +99,18 @@ export default function Header() {
           {/* Si l'utilisateur est connecté, afficher son nom ou un bouton de déconnexion */}
           {isAuthenticated ? (
             <>
-              <div className="text-white font-semibold">{`Bonjour, ${userName}`}</div>
+              <div className="font-semibold text-white">{`Bonjour, ${userName}`}</div>
               <button
                 onClick={handleLogout}
-                className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-all duration-300"
+                className="rounded-lg bg-indigo-600/90 px-4 py-2 text-white transition-all duration-300 hover:bg-indigo-800"
               >
                 Se déconnecter
               </button>
             </>
           ) : (
             <Link
-              href="/formulaire_connexion" // Lien vers la page de connexion
-              className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-all duration-300 ml-[-500px]"
+              href="/connexion"
+              className="ml-[-500px] rounded-lg bg-green-600 px-4 py-2 text-white transition-all duration-300 hover:bg-green-700"
             >
               Se connecter
             </Link>
@@ -99,7 +120,7 @@ export default function Header() {
           <input
             type="text"
             placeholder="Rechercher..."
-            className="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
+            className="rounded-lg border border-gray-300 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-green-500"
           />
         </div>
       </div>

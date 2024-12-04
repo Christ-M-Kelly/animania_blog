@@ -41,11 +41,11 @@ export default function ScrollToTop() {
         <button
           onClick={scrollToTop}
           className={`
-            bg-indigo-600 hover:bg-indigo-800
-            text-white p-4 
+            p-4 bg-indigo-600/90 text-white
+            hover:bg-indigo-800
             rounded-full 
             shadow-lg hover:shadow-2xl
-            backdrop-blur-sm bg-opacity-90
+            backdrop-blur-sm
             transition-all duration-300
             focus-visible:outline-none focus-visible:ring-2 
             focus-visible:ring-indigo-300 focus-visible:ring-offset-2

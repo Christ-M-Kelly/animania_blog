@@ -1,5 +1,5 @@
 {
-  "/formulaire_connexion/page": "app/formulaire_connexion/page.js",
-  "/page": "app/page.js",
-  "/a-propos/page": "app/a-propos/page.js"
+  "/connexion/page": "app/connexion/page.js",
+  "/a-propos/page": "app/a-propos/page.js",
+  "/page": "app/page.js"
 }
