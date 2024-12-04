@@ -76,7 +76,7 @@ export default function ScrollToTop() {
           bg-indigo-900 text-white 
           text-sm font-medium py-2 px-4 rounded-lg
           transition-all duration-200
-          shadow-lg backdrop-blur-sm bg-opacity-90"
+          shadow-lg backdrop-blur-sm bg-opacity/90"
           role="tooltip"
         >
           Retour en haut

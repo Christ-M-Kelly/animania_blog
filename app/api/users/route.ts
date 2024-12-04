@@ -6,7 +6,16 @@ import { NextResponse } from "next/server";
 export async function POST(req: Request) {
   try {
     const body = await req.json();
-    const { name, email, password, role, postTitle, postContent, postSlug, commentContent } = body;
+    const {
+      name,
+      email,
+      password,
+      role,
+      postTitle,
+      postContent,
+      postSlug,
+      commentContent,
+    } = body;
 
     // Vérifier si l'utilisateur existe déjà
     const existingUser = await prisma.user.findUnique({
@@ -59,11 +68,24 @@ export async function POST(req: Request) {
     });
 
     // Réponse de succès
-    return NextResponse.json({ message: "Données insérées avec succès", user, comment });
-  } catch (error: any) {
-    console.error("Erreur Prisma :", error.message);
+    return NextResponse.json({
+      message: "Données insérées avec succès",
+      user,
+      comment,
+    });
+  } catch (error: unknown) {
+    if (error instanceof Error) {
+      console.error("Erreur Prisma :", error.message);
+      return NextResponse.json(
+        {
+          error: "Erreur lors de l'insertion des données",
+          details: error.message,
+        },
+        { status: 500 }
+      );
+    }
     return NextResponse.json(
-      { error: "Erreur lors de l'insertion des données", details: error.message },
+      { error: "Une erreur inconnue s'est produite" },
       { status: 500 }
     );
   }
@@ -83,9 +105,18 @@ export async function GET() {
     });
 
     return NextResponse.json({ users });
-  } catch (error) {
+  } catch (error: unknown) {
+    if (error instanceof Error) {
+      return NextResponse.json(
+        {
+          error: "Erreur lors de la récupération des données",
+          details: error.message,
+        },
+        { status: 500 }
+      );
+    }
     return NextResponse.json(
-      { error: "Erreur lors de la récupération des données", details: error.message },
+      { error: "Une erreur inconnue s'est produite" },
       { status: 500 }
     );
   }
