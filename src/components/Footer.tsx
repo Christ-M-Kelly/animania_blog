@@ -1,7 +1,11 @@
 import Image from "next/image";
 import Link from "next/link";
 
-export default function Footer() {
+interface FooterProps {
+  className?: string;
+}
+
+export default function Footer({ className }: FooterProps) {
   const currentYear = new Date().getFullYear();
 
   const socialLinks = [
@@ -35,10 +39,7 @@ export default function Footer() {
   ];
 
   return (
-    <footer
-      className="bg-gradient-to-b from-green-700 to-green-900 py-6 relative"
-      role="contentinfo"
-    >
+    <footer className={className} role="contentinfo">
       <div className="container mx-auto px-4 max-w-7xl">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {/* Logo et description */}

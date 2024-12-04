@@ -5,6 +5,8 @@ import React from "react";
 export default function APropos() {
   return (
     <div className="relative min-h-screen">
+      <Header className="relative z-20" />
+
       {/* Vidéo en background */}
       <video
         autoPlay
@@ -23,7 +25,6 @@ export default function APropos() {
 
       {/* Contenu principal */}
       <div></div>
-      <Header />
       <div className="relative z-10 flex flex-col justify-center items-center text-center py-12 px-6 space-y-6">
         <h1 className="text-4xl font-semibold mb-4 text-white">
           À propos d'Animania
