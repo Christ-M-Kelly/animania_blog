@@ -45,7 +45,11 @@ export default function Formulaire() {
     }
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >
+  ) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
@@ -61,11 +65,11 @@ export default function Formulaire() {
           autoPlay
           muted
           loop
-          className="absolute top-0 left-0 w-full h-full object-cover z-[-1]"
+          className="fixed top-0 left-0 w-full h-full object-cover z-[-1]"
         />
-        
+
         {/* Superposition sombre */}
-        <div className="absolute top-0 left-0 w-full h-full bg-black opacity-60 z-[-1]" />
+        <div className="fixed top-0 left-0 w-full h-full bg-black opacity-60 z-[-1]" />
 
         {/* Formulaire et contenu */}
         <div className="relative bg-white p-6 sm:p-8 md:p-20 rounded-xl shadow-2xl w-[90%] sm:w-[30rem] md:w-[35rem] lg:w-[40rem] backdrop-blur-sm bg-opacity-90 z-10">
@@ -73,7 +77,9 @@ export default function Formulaire() {
             Ajouter des données
           </h2>
           {message && (
-            <div className="text-green-600 text-sm text-center mb-4">{message}</div>
+            <div className="text-green-600 text-sm text-center mb-4">
+              {message}
+            </div>
           )}
           <form onSubmit={handleSubmit} className="space-y-5 sm:space-y-6">
             {/* Nom */}
