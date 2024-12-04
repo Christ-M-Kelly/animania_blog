@@ -1,7 +1,11 @@
 import Image from "next/image";
 import Link from "next/link";
 
-export default function Footer() {
+interface FooterProps {
+  className?: string;
+}
+
+export default function Footer({ className }: FooterProps) {
   const currentYear = new Date().getFullYear();
 
   const socialLinks = [
@@ -36,45 +40,47 @@ export default function Footer() {
 
   return (
     <footer
-      className="bg-gradient-to-b from-green-700 to-green-900 py-16 relative"
+      className={`bg-gradient-to-b from-green-700 to-green-900 py-6 relative ${
+        className || ""
+      }`}
       role="contentinfo"
     >
       <div className="container mx-auto px-4 max-w-7xl">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {/* Logo et description */}
-          <div className="flex flex-col space-y-4 items-center md:items-start">
+          <div className="flex flex-col space-y-3 items-center md:items-start">
             <Link
               href="/"
-              className="flex items-center justify-center space-x-4 hover:opacity-90 transition-opacity"
+              className="flex items-center justify-center space-x-3 hover:opacity-90 transition-opacity"
             >
               <Image
                 src="/images/logo_rbg.png"
                 alt="Logo Animania - Votre portail sur le monde animal"
-                width={95}
-                height={95}
+                width={70} // Diminution de la taille du logo
+                height={70}
                 className="rounded-full border-2 border-green-700 shadow-lg hover:scale-105 transition-transform duration-300 bg-white"
               />
-              <h3 className="text-2xl font-bold text-white font-serif">
+              <h3 className="text-xl font-bold text-white font-serif">
                 Animania
               </h3>
             </Link>
-            <p className="text-gray-300 text-center md:text-left">
+            <p className="text-gray-300 text-center md:text-left text-sm">
               Où chaque créature a une histoire à raconter !
             </p>
           </div>
 
           {/* Navigation */}
           <div className="flex flex-col items-center md:items-start">
-            <h4 className="text-white font-semibold text-lg mb-4">
+            <h4 className="text-white font-semibold text-lg mb-3">
               Navigation
             </h4>
             <nav>
-              <ul className="flex flex-col space-y-3">
+              <ul className="flex flex-col space-y-2">
                 {navLinks.map((link) => (
                   <li key={link.name}>
                     <Link
                       href={link.href}
-                      className="text-gray-300 hover:text-green-300 hover:underline transition-colors duration-200"
+                      className="text-gray-300 hover:text-green-300 hover:underline transition-colors duration-200 text-sm"
                     >
                       {link.name}
                     </Link>
@@ -86,10 +92,10 @@ export default function Footer() {
 
           {/* Réseaux sociaux */}
           <div className="flex flex-col items-center md:items-start">
-            <h4 className="text-white font-semibold text-lg mb-4">
+            <h4 className="text-white font-semibold text-lg mb-3">
               Suivez-nous
             </h4>
-            <div className="flex space-x-6">
+            <div className="flex space-x-4">
               {socialLinks.map((social) => (
                 <div key={social.name} className="group relative">
                   <a
@@ -100,7 +106,7 @@ export default function Footer() {
                   >
                     <span className="sr-only">{social.name}</span>
                     <svg
-                      className="w-6 h-6"
+                      className="w-5 h-5" // Réduction de la taille des icônes sociales
                       fill="currentColor"
                       viewBox="0 0 24 24"
                       aria-label={`Icône ${social.name}`}
@@ -118,11 +124,11 @@ export default function Footer() {
         </div>
 
         {/* Séparateur */}
-        <div className="w-full h-px bg-gradient-to-r from-transparent via-gray-400 to-transparent my-8"></div>
+        <div className="w-full h-px bg-gradient-to-r from-transparent via-gray-400 to-transparent my-6"></div>
 
         {/* Copyright */}
         <div className="text-center">
-          <p className="text-gray-300 text-sm">
+          <p className="text-gray-300 text-xs">
             &copy; {currentYear} Animania - Tous droits réservés
           </p>
         </div>
