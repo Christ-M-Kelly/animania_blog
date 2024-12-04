@@ -13,6 +13,7 @@ export default function APropos() {
         loop
         muted
         className="absolute top-0 left-0 w-full h-full object-cover"
+        aria-label="Vidéo de fond montrant des paysages naturels"
       >
         <source
           src="https://videos.pexels.com/video-files/3042473/3042473-uhd_2560_1440_30fps.mp4"
@@ -21,89 +22,113 @@ export default function APropos() {
       </video>
 
       {/* Overlay sombre plus foncé */}
-      <div className="absolute top-0 left-0 w-full h-full bg-black opacity-80"></div>
+      <div
+        className="absolute top-0 left-0 w-full h-full bg-black opacity-90"
+        aria-hidden="true"
+      ></div>
 
       {/* Contenu principal */}
       <div></div>
       <div className="relative z-10 flex flex-col justify-center items-center text-center py-12 px-6 space-y-6">
-        <h1 className="text-4xl font-semibold mb-4 text-white">
+        <h1
+          className="text-4xl font-semibold mb-4 text-white"
+          style={{ color: "#fff" }}
+        >
           À propos d'Animania
         </h1>
-        <p className="text-lg leading-relaxed text-justify max-w-4xl text-white">
-          Bienvenue sur <span className="text-green-500">Animania</span>, un
+        <p
+          className="text-lg leading-relaxed text-justify max-w-4xl text-white"
+          style={{ lineHeight: "1.6" }}
+        >
+          Bienvenue sur <span className="text-green-600">Animania</span>, un
           blog créé par quatre étudiants en ingénierie informatique passionnés
           par la technologie et le développement web. Notre objectif est de
           partager nos connaissances, nos projets et nos découvertes dans le
           monde de l'informatique, plus spécifiquement dans les domaines du
           développement
-          <span className="text-green-500"> backend</span> et{" "}
-          <span className="text-green-500">frontend</span>. Notre projet utilise{" "}
-          <span className="text-green-500">Next.js</span> pour la gestion du
+          <span className="text-green-600"> backend</span> et{" "}
+          <span className="text-green-600">frontend</span>. Notre projet utilise{" "}
+          <span className="text-green-600">Next.js</span> pour la gestion du
           côté serveur et du côté client, avec une base de données
-          <span className="text-green-500"> MongoDB</span> pour stocker les
+          <span className="text-green-600"> MongoDB</span> pour stocker les
           informations, et un design moderne grâce à{" "}
-          <span className="text-green-500">Tailwind CSS</span>.
+          <span className="text-green-600">Tailwind CSS</span>.
         </p>
 
-        <h2 className="text-2xl font-semibold mt-6 text-white">
-          L'équipe d'Animania
-        </h2>
-        <p className="text-lg leading-relaxed text-justify max-w-4xl text-white">
-          Nous sommes un groupe d'étudiants qui avons décidé de mettre nos
-          compétences à l'épreuve en créant ce blog. Chaque membre de notre
-          équipe se spécialise dans un domaine spécifique du développement web.
-          Voici un peu plus sur chacun de nous :
-        </p>
+        <section className="mt-16">
+          <h2 className="text-3xl font-bold text-white mb-8 text-center">
+            L'équipe d'Animania
+          </h2>
 
-        <div className="space-y-4 mt-6 max-w-4xl text-justify text-white">
-          <p>
-            <span className="font-semibold">Mehdi</span> - Développeur Backend:
-            Je suis <span className="text-green-500">Mehdi</span>, étudiant en
-            génie informatique avec une passion pour les technologies backend.
-            Dans ce projet, je me concentre sur la gestion de la base de données
-            avec <span className="text-green-500">MongoDB</span> et la création
-            des API en <span className="text-green-500">Next.js</span> pour
-            permettre une interaction fluide entre le frontend et la base de
-            données. J'aime résoudre des problèmes complexes et optimiser les
-            systèmes pour assurer leur performance.
-          </p>
-          <p>
-            <span className="font-semibold">Geremy</span> - Développeur Backend:
-            Salut ! Je suis <span className="text-green-500">Geremy</span>,
-            étudiant débutant en <span className="text-green-500">backend</span>
-            . Mon rôle sur ce projet est de créer des structures de données
-            robustes et de m'assurer que nos API sont sécurisées et
-            performantes. En utilisant{" "}
-            <span className="text-green-500">Next.js</span> et{" "}
-            <span className="text-green-500">MongoDB</span>, je travaille à la
-            conception des fonctionnalités qui permettent à Animania de
-            fonctionner de manière fluide et rapide pour nos utilisateurs.
-          </p>
-          <p>
-            <span className="font-semibold">Kelly</span> - Développeuse
-            Frontend: Je m'appelle <span className="text-green-500">Kelly</span>
-            , et je suis passionnée par le développement{" "}
-            <span className="text-green-500">frontend</span>. Dans ce projet, je
-            travaille à créer une interface utilisateur (UI) intuitive et
-            attractive, en utilisant{" "}
-            <span className="text-green-500">Next.js</span> et{" "}
-            <span className="text-green-500">Tailwind CSS</span>. Mon objectif
-            est de rendre l'expérience utilisateur aussi agréable que possible
-            tout en optimisant la performance du site.
-          </p>
-          <p>
-            <span className="font-semibold">Sébastien</span> - Développeur
-            Frontend: Salut, je suis{" "}
-            <span className="text-green-500">Sébastien</span> ! Je m'occupe
-            également du <span className="text-green-500">frontend</span>{" "}
-            d'Animania. Je me concentre sur la mise en place des animations, de
-            la navigation et de la conception responsive pour que notre blog
-            fonctionne parfaitement sur tous les types de dispositifs. Avec{" "}
-            <span className="text-green-500">Tailwind CSS</span>, nous avons
-            réussi à créer un design moderne et épuré qui met en valeur notre
-            contenu.
-          </p>
-        </div>
+          <div className="grid md:grid-cols-2 gap-8">
+            {/* Carte de membre d'équipe */}
+            <div className="bg-white rounded-xl shadow-md p-6 hover:shadow-lg transition-shadow">
+              <div className="flex items-center mb-4">
+                <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center">
+                  <span className="text-2xl text-green-600">M</span>
+                </div>
+                <div className="ml-4">
+                  <h3 className="text-xl font-semibold text-gray-800">Mehdi</h3>
+                  <p className="text-green-600">Développeur Backend</p>
+                </div>
+              </div>
+              <p className="text-gray-600">
+                Expert en MongoDB et APIs Next.js, passionné par l'optimisation
+                et la performance des systèmes.
+              </p>
+            </div>
+
+            <div className="bg-white rounded-xl shadow-md p-6 hover:shadow-lg transition-shadow">
+              <div className="flex items-center mb-4">
+                <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center">
+                  <span className="text-2xl text-green-600">G</span>
+                </div>
+                <div className="ml-4">
+                  <h3 className="text-xl font-semibold text-gray-800">
+                    Geremy
+                  </h3>
+                  <p className="text-green-600">Développeur Backend</p>
+                </div>
+              </div>
+              <p className="text-gray-600">
+                Spécialiste des structures de données et de la sécurité des
+                APIs.
+              </p>
+            </div>
+
+            <div className="bg-white rounded-xl shadow-md p-6 hover:shadow-lg transition-shadow">
+              <div className="flex items-center mb-4">
+                <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center">
+                  <span className="text-2xl text-green-600">K</span>
+                </div>
+                <div className="ml-4">
+                  <h3 className="text-xl font-semibold text-gray-800">Kelly</h3>
+                  <p className="text-green-600">Développeuse Frontend</p>
+                </div>
+              </div>
+              <p className="text-gray-600">
+                Créatrice d'interfaces utilisateur intuitives et attractives.
+              </p>
+            </div>
+
+            <div className="bg-white rounded-xl shadow-md p-6 hover:shadow-lg transition-shadow">
+              <div className="flex items-center mb-4">
+                <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center">
+                  <span className="text-2xl text-green-600">S</span>
+                </div>
+                <div className="ml-4">
+                  <h3 className="text-xl font-semibold text-gray-800">
+                    Sébastien
+                  </h3>
+                  <p className="text-green-600">Développeur Frontend</p>
+                </div>
+              </div>
+              <p className="text-gray-600">
+                Expert en animations et design responsive.
+              </p>
+            </div>
+          </div>
+        </section>
 
         <h2 className="text-2xl font-semibold mt-6 text-white">
           Pourquoi Animania ?
