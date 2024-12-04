@@ -39,7 +39,12 @@ export default function Footer({ className }: FooterProps) {
   ];
 
   return (
-    <footer className={className} role="contentinfo">
+    <footer
+      className={`bg-gradient-to-b from-green-700 to-green-900 py-6 relative ${
+        className || ""
+      }`}
+      role="contentinfo"
+    >
       <div className="container mx-auto px-4 max-w-7xl">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {/* Logo et description */}

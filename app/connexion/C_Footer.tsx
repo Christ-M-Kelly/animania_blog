@@ -1,3 +1,4 @@
+import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 
@@ -14,7 +15,7 @@ export default function C_Footer() {
   ];
 
   return (
-    <footer className="bg-gradient-to-b from-green-700 to-green-900 py-6 relative">
+    <footer className="bg-gradient-to-b from-green-700 to-green-900 py-6 fixed bottom-0 w-full">
       <div className="container mx-auto px-4">
         <div className="flex flex-row items-center justify-between">
           <Link
