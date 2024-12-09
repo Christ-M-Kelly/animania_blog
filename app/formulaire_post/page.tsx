@@ -1,8 +1,8 @@
-"use client"; // Marque ce fichier comme un Client Component
+"use client";
 
 import { useState } from "react";
 import "@fortawesome/fontawesome-free/css/all.min.css";
-import { toast, ToastContainer } from "react-toastify"; // Notifications Toast
+import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 export default function FormulairePost() {
@@ -13,7 +13,7 @@ export default function FormulairePost() {
   });
 
   const [image, setImage] = useState<File | null>(null);
-  const [preview, setPareview] = useState<string | null>(null); // URL de l'aperçu
+  const [preview, setPreview] = useState<string | null>(null);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -26,21 +26,27 @@ export default function FormulairePost() {
       formDataToSend.append("image", image);
     }
 
+    console.log("FormData envoyé :", Object.fromEntries(formDataToSend.entries()));
+
     try {
-      const response = await fetch("/api/posts", {
+      const response = await fetch("/api/Post", {
         method: "POST",
         body: formDataToSend,
       });
 
-      const result = await response.json();
-      if (response.ok) {
-        toast.success("Post créé avec succès !");
-        setFormData({ title: "", content: "", published: false });
-        setImage(null);
-        setPreview(null); // Réinitialiser l'aperçu
-      } else {
-        toast.error(result.error || "Une erreur est survenue.");
+      if (!response.ok) {
+        const errorData = await response.text();
+        console.error("Erreur API :", errorData);
+        throw new Error(`Erreur du serveur : ${response.status} - ${response.statusText}`);
       }
+
+      const result = await response.json();
+      console.log("Résultat :", result);
+
+      toast.success("Post créé avec succès !");
+      setFormData({ title: "", content: "", published: false });
+      setImage(null);
+      setPreview(null);
     } catch (error) {
       console.error("Erreur lors de la soumission :", error);
       toast.error("Erreur lors de l'envoi des données.");
@@ -59,16 +65,14 @@ export default function FormulairePost() {
     if (e.target.files && e.target.files[0]) {
       const file = e.target.files[0];
       setImage(file);
-      setPreview(URL.createObjectURL(file)); // Génère une URL pour l'aperçu
+      setPreview(URL.createObjectURL(file));
     }
   };
 
   return (
     <div>
-      {/* Notifications */}
       <ToastContainer />
       <main className="relative min-h-screen flex flex-col items-center pt-32 pb-32">
-        {/* Vidéo en arrière-plan */}
         <video
           src="https://videos.pexels.com/video-files/856354/856354-hd_1920_1080_25fps.mp4"
           autoPlay
@@ -76,17 +80,12 @@ export default function FormulairePost() {
           loop
           className="absolute top-0 left-0 w-full h-full object-cover z-[-1]"
         />
-        
-        {/* Superposition sombre */}
         <div className="absolute top-0 left-0 w-full h-full bg-black opacity-60 z-[-1]" />
-
-        {/* Formulaire */}
         <div className="relative bg-white p-6 sm:p-8 md:p-20 rounded-xl shadow-2xl w-[90%] sm:w-[30rem] md:w-[35rem] lg:w-[40rem] backdrop-blur-sm bg-opacity-90 z-10">
           <h2 className="text-2xl sm:text-3xl font-bold text-center mb-6 sm:mb-8 text-blue-800">
             Créer un Post
           </h2>
           <form onSubmit={handleSubmit} className="space-y-5 sm:space-y-6">
-            {/* Titre */}
             <div>
               <label
                 htmlFor="title"
@@ -105,8 +104,6 @@ export default function FormulairePost() {
                 className="mt-1 block w-full px-3 py-2 rounded-lg border-2 border-blue-100 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-200 text-sm sm:text-base"
               />
             </div>
-
-            {/* Contenu */}
             <div>
               <label
                 htmlFor="content"
@@ -124,8 +121,6 @@ export default function FormulairePost() {
                 className="mt-1 block w-full px-3 py-2 rounded-lg border-2 border-blue-100 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-200 text-sm sm:text-base h-28"
               />
             </div>
-
-            {/* Image */}
             <div>
               <label
                 htmlFor="image"
@@ -141,7 +136,6 @@ export default function FormulairePost() {
                 onChange={handleFileChange}
                 className="mt-1 block w-full text-sm sm:text-base"
               />
-              {/* Miniature */}
               {preview && (
                 <div className="mt-4">
                   <p className="text-sm text-gray-500">Aperçu de l'image :</p>
@@ -153,8 +147,6 @@ export default function FormulairePost() {
                 </div>
               )}
             </div>
-
-            {/* Publié */}
             <div className="flex items-center space-x-2">
               <input
                 type="checkbox"
@@ -168,8 +160,6 @@ export default function FormulairePost() {
                 Publier immédiatement
               </label>
             </div>
-
-            {/* Bouton Envoyer */}
             <button
               type="submit"
               className="w-full bg-blue-600 text-white py-2 sm:py-3 rounded-lg hover:bg-blue-700 transform hover:scale-105 transition-all duration-200 font-semibold text-base sm:text-lg shadow-md"
