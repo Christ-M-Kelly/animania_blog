@@ -18,6 +18,7 @@ export default function FormulairePost() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
+    // Construction du FormData
     const formDataToSend = new FormData();
     formDataToSend.append("title", formData.title);
     formDataToSend.append("content", formData.content);
@@ -26,27 +27,25 @@ export default function FormulairePost() {
       formDataToSend.append("image", image);
     }
 
-    console.log("FormData envoyé :", Object.fromEntries(formDataToSend.entries()));
-
     try {
       const response = await fetch("/api/Post", {
         method: "POST",
         body: formDataToSend,
       });
 
-      if (!response.ok) {
-        const errorData = await response.text();
-        console.error("Erreur API :", errorData);
-        throw new Error(`Erreur du serveur : ${response.status} - ${response.statusText}`);
-      }
-
       const result = await response.json();
-      console.log("Résultat :", result);
-
-      toast.success("Post créé avec succès !");
-      setFormData({ title: "", content: "", published: false });
-      setImage(null);
-      setPreview(null);
+      if (response.ok) {
+        toast.success("Post créé avec succès !");
+        setTimeout(() => {
+          window.location.href = "http://localhost:3000"; // Redirection (modifiable)
+        }, 2000);
+        // Réinitialisation des données
+        setFormData({ title: "", content: "", published: false });
+        setImage(null);
+        setPreview(null);
+      } else {
+        toast.error(result.error || "Une erreur est survenue.");
+      }
     } catch (error) {
       console.error("Erreur lors de la soumission :", error);
       toast.error("Erreur lors de l'envoi des données.");
@@ -54,10 +53,11 @@ export default function FormulairePost() {
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value, type, checked } = e.target;
+    const { name, value, type } = e.target;
+    const isCheckbox = type === "checkbox";
     setFormData((prev) => ({
       ...prev,
-      [name]: type === "checkbox" ? checked : value,
+      [name]: isCheckbox ? (e.target as HTMLInputElement).checked : value,
     }));
   };
 
