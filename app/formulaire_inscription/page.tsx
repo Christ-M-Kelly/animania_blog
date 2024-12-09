@@ -1,8 +1,8 @@
-"use client"; // Marque ce fichier comme un Client Component
+"use client";
 
 import { useState } from "react";
 import "@fortawesome/fontawesome-free/css/all.min.css";
-import { toast, ToastContainer } from "react-toastify"; // Notifications Toast
+import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 export default function Formulaire() {
@@ -11,13 +11,7 @@ export default function Formulaire() {
     email: "",
     password: "",
     role: "USER",
-    postTitle: "",
-    postContent: "",
-    postSlug: "",
-    commentContent: "",
   });
-
-  const [message, setMessage] = useState("");
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -31,8 +25,7 @@ export default function Formulaire() {
 
       const result = await response.json();
       if (response.ok) {
-        toast.success("Données insérées avec succès !");
-        // Rediriger vers localhost après succès
+        toast.success("Utilisateur créé avec succès !");
         setTimeout(() => {
           window.location.href = "http://localhost:3000"; // Redirection
         }, 2000);
@@ -46,9 +39,7 @@ export default function Formulaire() {
   };
 
   const handleChange = (
-    e: React.ChangeEvent<
-      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
-    >
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
@@ -56,10 +47,8 @@ export default function Formulaire() {
 
   return (
     <div>
-      {/* Notifications */}
       <ToastContainer />
       <main className="relative min-h-screen flex flex-col items-center pt-32 pb-32">
-        {/* Vidéo en arrière-plan */}
         <video
           src="https://videos.pexels.com/video-files/856354/856354-hd_1920_1080_25fps.mp4"
           autoPlay
@@ -67,22 +56,13 @@ export default function Formulaire() {
           loop
           className="fixed top-0 left-0 w-full h-full object-cover z-[-1]"
         />
-
-        {/* Superposition sombre */}
         <div className="fixed top-0 left-0 w-full h-full bg-black opacity-60 z-[-1]" />
 
-        {/* Formulaire et contenu */}
         <div className="relative bg-white p-6 sm:p-8 md:p-20 rounded-xl shadow-2xl w-[90%] sm:w-[30rem] md:w-[35rem] lg:w-[40rem] backdrop-blur-sm bg-opacity-90 z-10">
           <h2 className="text-2xl sm:text-3xl font-bold text-center mb-6 sm:mb-8 text-blue-800">
-            Ajouter des données
+            Créer un utilisateur
           </h2>
-          {message && (
-            <div className="text-green-600 text-sm text-center mb-4">
-              {message}
-            </div>
-          )}
           <form onSubmit={handleSubmit} className="space-y-5 sm:space-y-6">
-            {/* Nom */}
             <div>
               <label
                 htmlFor="name"
@@ -101,8 +81,6 @@ export default function Formulaire() {
                 className="mt-1 block w-full px-3 py-2 rounded-lg border-2 border-blue-100 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-200 text-sm sm:text-base"
               />
             </div>
-
-            {/* Email */}
             <div>
               <label
                 htmlFor="email"
@@ -121,8 +99,6 @@ export default function Formulaire() {
                 className="mt-1 block w-full px-3 py-2 rounded-lg border-2 border-blue-100 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-200 text-sm sm:text-base"
               />
             </div>
-
-            {/* Mot de passe */}
             <div>
               <label
                 htmlFor="password"
@@ -141,8 +117,6 @@ export default function Formulaire() {
                 className="mt-1 block w-full px-3 py-2 rounded-lg border-2 border-blue-100 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-200 text-sm sm:text-base"
               />
             </div>
-
-            {/* Rôle */}
             <div>
               <label
                 htmlFor="role"
@@ -162,45 +136,6 @@ export default function Formulaire() {
                 <option value="ADMIN">Administrateur</option>
               </select>
             </div>
-
-            {/* Titre du post */}
-            <div>
-              <label
-                htmlFor="postTitle"
-                className="block text-sm sm:text-base font-semibold text-blue-700 mb-2"
-              >
-                Titre du Post
-              </label>
-              <input
-                type="text"
-                id="postTitle"
-                name="postTitle"
-                value={formData.postTitle}
-                onChange={handleChange}
-                placeholder="Titre du post"
-                className="mt-1 block w-full px-3 py-2 rounded-lg border-2 border-blue-100 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-200 text-sm sm:text-base"
-              />
-            </div>
-
-            {/* Contenu du post */}
-            <div>
-              <label
-                htmlFor="postContent"
-                className="block text-sm sm:text-base font-semibold text-blue-700 mb-2"
-              >
-                Contenu du Post
-              </label>
-              <textarea
-                id="postContent"
-                name="postContent"
-                value={formData.postContent}
-                onChange={handleChange}
-                placeholder="Contenu du post..."
-                className="mt-1 block w-full px-3 py-2 rounded-lg border-2 border-blue-100 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-200 text-sm sm:text-base"
-              />
-            </div>
-
-            {/* Bouton Envoyer */}
             <button
               type="submit"
               className="w-full bg-blue-600 text-white py-2 sm:py-3 rounded-lg hover:bg-blue-700 transform hover:scale-105 transition-all duration-200 font-semibold text-base sm:text-lg shadow-md"
