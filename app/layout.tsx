@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
-import ScrollToTop from "@/components/ui/ScrollToTop";
+import ScrollToTop from "../src/components/ui/ScrollToTop";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -27,9 +27,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased flex flex-col min-h-screen`}
       >
-        {children}
+        {/* Contenu principal */}
+        <main className="flex-grow">{children}</main>
+
+        {/* Bouton pour remonter */}
         <ScrollToTop />
       </body>
     </html>

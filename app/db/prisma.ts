@@ -1,7 +1,7 @@
+/* eslint-disable no-var */
 import { PrismaClient } from "@prisma/client";
 
 declare global {
-  // Evite les doublons lors de l'utilisation en mode développement
   var prisma: PrismaClient | undefined;
 }
 
