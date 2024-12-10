@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 export async function uploadImage(file: Blob): Promise<string> {
   try {
     const formData = new FormData();
@@ -21,3 +22,14 @@ export async function uploadImage(file: Blob): Promise<string> {
     throw new Error("L'upload de l'image a échoué.");
   }
 }
+=======
+import { upload } from "@vercel/blob";
+
+export async function uploadImage(file: Blob): Promise<string> {
+  const { url } = await upload(file, {
+    access: "public",
+    contentType: file.type,
+  });
+  return url;
+}
+>>>>>>> origin/main

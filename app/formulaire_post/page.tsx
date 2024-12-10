@@ -27,12 +27,31 @@ export default function FormulairePost() {
       formDataToSend.append("image", image);
     }
 
+<<<<<<< HEAD
+=======
+    console.log(
+      "FormData envoyé :",
+      Object.fromEntries(formDataToSend.entries())
+    );
+
+>>>>>>> origin/main
     try {
       const response = await fetch("/api/Post", {
         method: "POST",
         body: formDataToSend,
       });
 
+<<<<<<< HEAD
+=======
+      if (!response.ok) {
+        const errorData = await response.text();
+        console.error("Erreur API :", errorData);
+        throw new Error(
+          `Erreur du serveur : ${response.status} - ${response.statusText}`
+        );
+      }
+
+>>>>>>> origin/main
       const result = await response.json();
       if (response.ok) {
         toast.success("Post créé avec succès !");
@@ -47,14 +66,25 @@ export default function FormulairePost() {
         toast.error(result.error || "Une erreur est survenue.");
       }
     } catch (error) {
-      console.error("Erreur lors de la soumission :", error);
+      console.error(
+        "Erreur lors de la soumission :",
+        error instanceof Error ? error.message : error
+      );
       toast.error("Erreur lors de l'envoi des données.");
     }
   };
 
+<<<<<<< HEAD
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value, type } = e.target;
     const isCheckbox = type === "checkbox";
+=======
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const target = e.target as HTMLInputElement;
+    const { name, value, type, checked } = target;
+>>>>>>> origin/main
     setFormData((prev) => ({
       ...prev,
       [name]: isCheckbox ? (e.target as HTMLInputElement).checked : value,
@@ -156,13 +186,16 @@ export default function FormulairePost() {
                 onChange={handleChange}
                 className="w-5 h-5 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
               />
-              <label htmlFor="published" className="text-sm sm:text-base font-semibold text-blue-700">
+              <label
+                htmlFor="published"
+                className="text-sm sm:text-base font-semibold text-blue-700"
+              >
                 Publier immédiatement
               </label>
             </div>
             <button
               type="submit"
-              className="w-full bg-blue-600 text-white py-2 sm:py-3 rounded-lg hover:bg-blue-700 transform hover:scale-105 transition-all duration-200 font-semibold text-base sm:text-lg shadow-md"
+              className="w-full bg-green-600 text-white py-2 sm:py-3 rounded-lg hover:bg-blue-700 transform hover:scale-105 transition-all duration-200 font-semibold text-base sm:text-lg shadow-md"
             >
               Envoyer
             </button>
