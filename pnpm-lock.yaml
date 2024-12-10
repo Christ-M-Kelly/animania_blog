@@ -38,6 +38,9 @@ importers:
       bcryptjs:
         specifier: ^2.4.3
         version: 2.4.3
+      blob:
+        specifier: ^0.1.0
+        version: 0.1.0
       class-variance-authority:
         specifier: ^0.7.1
         version: 0.7.1
@@ -848,6 +851,9 @@ packages:
     resolution: {integrity: sha512-Ceh+7ox5qe7LJuLHoY0feh3pHuUDHAcRUeyL2VYghZwfpkNIy/+8Ocg0a3UuSoYzavmylwuLWQOf3hl0jjMMIw==}
     engines: {node: '>=8'}
 
+  blob@0.1.0:
+    resolution: {integrity: sha512-k+GwK+4Rj+MPNT4qu+y6+kHp+mPmmNd+28zdrIo69QM9UvypK5Vhcw7jnRiY4KaOMAiOdn0NtPQGTb+Ox1Dtng==}
+
   brace-expansion@1.1.11:
     resolution: {integrity: sha512-iCuPHDFgrHX7H2vEI/5xpz07zSHB00TpugqhmYtVmMO6518mCuRMoOYFldEBl0g187ufozdaHgWKcYFb61qGiA==}
 
@@ -1244,6 +1250,10 @@ packages:
     peerDependenciesMeta:
       jiti:
         optional: true
+
+  esm@3.2.25:
+    resolution: {integrity: sha512-U1suiZ2oDVWv4zPO56S0NcR5QriEahGtdN2OR6FiOG4WJvcjBVFB0qI4+eKoWFH483PKGuLuu6V8Z4T5g63UVA==}
+    engines: {node: '>=6'}
 
   espree@10.3.0:
     resolution: {integrity: sha512-0QYC8b24HWY8zjRnDTL6RiHfDbAWn63qb4LMj1Z4b076A4une81+z03Kg7l7mn/48PUTqoLptSXez8oknU8Clg==}
@@ -3344,6 +3354,10 @@ snapshots:
 
   binary-extensions@2.3.0: {}
 
+  blob@0.1.0:
+    dependencies:
+      esm: 3.2.25
+
   brace-expansion@1.1.11:
     dependencies:
       balanced-match: 1.0.2
@@ -3860,6 +3874,8 @@ snapshots:
       jiti: 1.21.6
     transitivePeerDependencies:
       - supports-color
+
+  esm@3.2.25: {}
 
   espree@10.3.0:
     dependencies:
