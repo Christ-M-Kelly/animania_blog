@@ -163,6 +163,9 @@ export default function APropos() {
           Vous pouvez également nous suivre sur les réseaux sociaux pour être au
           courant de nos dernières mises à jour.
         </p>
+        <button className="px-6 py-3 border-2 border-white text-white rounded-lg hover:bg-green-600 transition-colors">
+          Nous contacter
+        </button>
       </div>
       <Footer />
     </div>
