@@ -1,1 +1,4 @@
-{}
+{
+  "/_not-found/page": "app/_not-found/page.js",
+  "/formulaire_post/page": "app/formulaire_post/page.js"
+}
