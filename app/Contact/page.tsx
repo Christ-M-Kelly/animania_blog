@@ -14,6 +14,9 @@ export default function ContactForm() {
     message: "",
   });
 
+  // État pour afficher un message de confirmation
+  const [showPopup, setShowPopup] = useState(false);
+
   // Gestion des changements dans les champs du formulaire
   const handleChange = (
     e: React.ChangeEvent<
@@ -31,11 +34,29 @@ export default function ContactForm() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     console.log("Formulaire soumis avec les données suivantes :", formData);
-    // Ajouter ici la logique pour envoyer les données, par exemple avec fetch ou axios
+
+    // Afficher le pop-up de succès
+    setShowPopup(true);
+
+    // Réinitialiser le formulaire
+    setFormData({
+      firstName: "",
+      lastName: "",
+      email: "",
+      phone: "",
+      companySize: "",
+      country: "",
+      message: "",
+    });
+
+    // Masquer le pop-up après 3 secondes
+    setTimeout(() => {
+      setShowPopup(false);
+    }, 3000);
   };
 
   return (
-    <div className="relative h-screen w-screen">
+    <div className="fixed h-screen w-screen">
       {/* Vidéo en arrière-plan */}
       <video
         className="absolute top-0 left-0 h-full w-full object-cover"
@@ -52,7 +73,7 @@ export default function ContactForm() {
       <div className="relative z-10 max-w-2xl mx-auto p-8 bg-white bg-opacity-80 shadow-md rounded-lg">
         <h1 className="text-2xl font-bold mb-6">Contactez-nous</h1>
         <form onSubmit={handleSubmit} className="space-y-4">
-          {/* Prénom */}
+          {/* Champs de formulaire */}
           <div>
             <label
               htmlFor="firstName"
@@ -71,6 +92,7 @@ export default function ContactForm() {
               className="mt-1 w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
             />
           </div>
+          {/* Ajoutez ici les autres champs (comme dans votre code existant) */}
 
           {/* Nom */}
           <div>
@@ -200,7 +222,6 @@ export default function ContactForm() {
               className="mt-1 w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
             ></textarea>
           </div>
-
           {/* Bouton de soumission */}
           <div>
             <button
@@ -212,6 +233,14 @@ export default function ContactForm() {
           </div>
         </form>
       </div>
+      {showPopup && (
+  <div
+    className="fixed bottom-4 right-4 bg-green-500 text-white py-2 px-4 rounded-lg shadow-lg z-50"
+  >
+    Message envoyé avec succès !
+  </div>
+)}
+
     </div>
   );
 }
