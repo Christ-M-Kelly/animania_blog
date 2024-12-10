@@ -176,7 +176,7 @@ export default function FormulairePost() {
             </div>
             <button
               type="submit"
-              className="w-full bg-blue-600 text-white py-2 sm:py-3 rounded-lg hover:bg-blue-700 transform hover:scale-105 transition-all duration-200 font-semibold text-base sm:text-lg shadow-md"
+              className="w-full bg-green-600 text-white py-2 sm:py-3 rounded-lg hover:bg-blue-700 transform hover:scale-105 transition-all duration-200 font-semibold text-base sm:text-lg shadow-md"
             >
               Envoyer
             </button>
