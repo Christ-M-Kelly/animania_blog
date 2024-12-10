@@ -26,7 +26,10 @@ export default function FormulairePost() {
       formDataToSend.append("image", image);
     }
 
-    console.log("FormData envoyé :", Object.fromEntries(formDataToSend.entries()));
+    console.log(
+      "FormData envoyé :",
+      Object.fromEntries(formDataToSend.entries())
+    );
 
     try {
       const response = await fetch("/api/Post", {
@@ -37,7 +40,9 @@ export default function FormulairePost() {
       if (!response.ok) {
         const errorData = await response.text();
         console.error("Erreur API :", errorData);
-        throw new Error(`Erreur du serveur : ${response.status} - ${response.statusText}`);
+        throw new Error(
+          `Erreur du serveur : ${response.status} - ${response.statusText}`
+        );
       }
 
       const result = await response.json();
@@ -48,13 +53,19 @@ export default function FormulairePost() {
       setImage(null);
       setPreview(null);
     } catch (error) {
-      console.error("Erreur lors de la soumission :", error);
+      console.error(
+        "Erreur lors de la soumission :",
+        error instanceof Error ? error.message : error
+      );
       toast.error("Erreur lors de l'envoi des données.");
     }
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value, type, checked } = e.target;
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const target = e.target as HTMLInputElement;
+    const { name, value, type, checked } = target;
     setFormData((prev) => ({
       ...prev,
       [name]: type === "checkbox" ? checked : value,
@@ -156,7 +167,10 @@ export default function FormulairePost() {
                 onChange={handleChange}
                 className="w-5 h-5 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
               />
-              <label htmlFor="published" className="text-sm sm:text-base font-semibold text-blue-700">
+              <label
+                htmlFor="published"
+                className="text-sm sm:text-base font-semibold text-blue-700"
+              >
                 Publier immédiatement
               </label>
             </div>
