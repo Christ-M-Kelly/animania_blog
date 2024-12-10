@@ -1,8 +1,8 @@
-import { createUpload } from "@vercel/blob";
+import { upload } from "@vercel/blob";
 
 export async function uploadImage(file: Blob): Promise<string> {
-  const { url } = await createUpload(file, {
-    access: "public", // Rendre l'image accessible publiquement
+  const { url } = await upload(file, {
+    access: "public",
     contentType: file.type,
   });
   return url;
