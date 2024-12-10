@@ -11,16 +11,10 @@
       "static/chunks/main-app.js",
       "static/chunks/app/page.js"
     ],
-    "/formulaire_post/page": [
+    "/_not-found/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/css/app/formulaire_post/page.css",
-      "static/chunks/app/formulaire_post/page.js"
-    ],
-    "/api/Post/route": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/api/Post/route.js"
+      "static/chunks/app/_not-found/page.js"
     ]
   }
 }

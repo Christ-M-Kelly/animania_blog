@@ -25,6 +25,7 @@ model Post {
   published   Boolean  @default(false)
   title       String
   content     String
+  likes       Int      @default(0) // Add this field
   slug        String   @unique
   views       Int      @default(0) // Pour le dashboard
   author      User     @relation(fields: [authorId], references: [id])

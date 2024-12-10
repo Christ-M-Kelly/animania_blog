@@ -1,3 +1,4 @@
+import Link from "next/link";
 import Header from "../src/components/Header";
 import Footer from "../src/components/Footer";
 import { prisma } from "./db/prisma";
@@ -29,36 +30,41 @@ export default async function Home() {
           {/* Grille des blocs d'articles */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {posts.map((post) => (
-              <div
+              <Link
                 key={post.id}
-                className="bg-white shadow-md rounded-lg overflow-hidden hover:shadow-lg transition-shadow duration-300"
+                href={`/post/${post.id}`} // Le lien vers la page du post
+                passHref
               >
-                {/* Conteneur de l'image */}
-                <div className="w-full h-64">
-                  <img
-                    src={post.imageUrl || "https://via.placeholder.com/300x180"}
-                    alt={post.title}
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-
-                {/* Contenu de l'article */}
-                <div className="p-4">
-                  <div className="text-green-600 font-semibold text-sm uppercase mb-2">
-                    {new Date(post.createdAt).toLocaleDateString("fr-FR", {
-                      year: "numeric",
-                      month: "long",
-                      day: "numeric",
-                    })}
+                <div
+                  className="bg-white shadow-md rounded-lg overflow-hidden hover:shadow-lg transition-shadow duration-300 cursor-pointer"
+                >
+                  {/* Conteneur de l'image avec rapport d'aspect 16:9 */}
+                  <div className="relative w-full h-64">
+                    <img
+                      src={post.imageUrl || "https://via.placeholder.com/300x180"}
+                      alt={post.title}
+                      className="w-full h-full object-cover"
+                    />
                   </div>
-                  <h2 className="text-lg font-bold text-gray-800 hover:text-green-700 transition-colors duration-300">
-                    {post.title}
-                  </h2>
-                  <p className="mt-2 text-gray-600">
-                    {post.content.substring(0, 100)}...
-                  </p>
+
+                  {/* Contenu de l'article */}
+                  <div className="p-4">
+                    <div className="text-green-600 font-semibold text-sm uppercase mb-2">
+                      {new Date(post.createdAt).toLocaleDateString("fr-FR", {
+                        year: "numeric",
+                        month: "long",
+                        day: "numeric",
+                      })}
+                    </div>
+                    <h2 className="text-lg font-bold text-gray-800 hover:text-green-700 transition-colors duration-300">
+                      {post.title}
+                    </h2>
+                    <p className="mt-2 text-gray-600">
+                      {post.content.substring(0, 100)}...
+                    </p>
+                  </div>
                 </div>
-              </div>
+              </Link>
             ))}
           </div>
         </div>
