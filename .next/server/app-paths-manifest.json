@@ -1,6 +1,4 @@
 {
   "/api/Post/route": "app/api/Post/route.js",
-  "/_not-found/page": "app/_not-found/page.js",
-  "/formulaire_post/page": "app/formulaire_post/page.js",
-  "/page": "app/page.js"
+  "/formulaire_post/page": "app/formulaire_post/page.js"
 }
