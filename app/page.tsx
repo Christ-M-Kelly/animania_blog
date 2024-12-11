@@ -34,11 +34,11 @@ export default async function Home() {
                 className="bg-white shadow-md rounded-lg overflow-hidden hover:shadow-lg transition-shadow duration-300"
               >
                 {/* Conteneur de l'image */}
-                <div className="w-full h-64">
+                <div className="w-full h-64 relative">
                   <img
                     src={post.imageUrl || "https://via.placeholder.com/300x180"}
                     alt={post.title}
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-cover absolute top-0 left-0"
                   />
                 </div>
 
