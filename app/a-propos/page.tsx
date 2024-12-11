@@ -1,173 +1,125 @@
-import Footer from "@/src/components/Footer";
+"use client";
+
 import Header from "@/src/components/Header";
-import React from "react";
+import Footer from "@/src/components/Footer";
+import Link from "next/link";
 
-export default function APropos() {
+interface AboutSection {
+  title: string;
+  description: string;
+  link: string;
+  icon: string;
+}
+
+const aboutSections: AboutSection[] = [
+  {
+    title: "Qui Sommes-Nous",
+    description:
+      "Découvrez notre histoire, notre mission et nos valeurs qui guident nos actions au quotidien.",
+    link: "/a-propos/qui-sommes-nous",
+    icon: "👥",
+  },
+  {
+    title: "Notre Équipe",
+    description:
+      "Rencontrez les passionnés qui contribuent à faire vivre notre plateforme et à partager leurs connaissances.",
+    link: "/a-propos/notre-equipe",
+    icon: "🤝",
+  },
+  {
+    title: "Nous Contacter",
+    description:
+      "Une question, une suggestion ? N'hésitez pas à nous contacter, nous sommes à votre écoute.",
+    link: "/a-propos/contact",
+    icon: "📧",
+  },
+];
+
+export default function AboutPage() {
   return (
-    <div className="relative min-h-screen">
-      <Header className="relative z-20" />
-
-      {/* Vidéo en background */}
-      <video
-        autoPlay
-        loop
-        muted
-        className="absolute top-0 left-0 w-full h-full object-cover"
-        aria-label="Vidéo de fond montrant des paysages naturels"
-      >
-        <source
-          src="https://videos.pexels.com/video-files/3042473/3042473-uhd_2560_1440_30fps.mp4"
-          type="video/mp4"
-        />
-      </video>
-
-      {/* Overlay sombre plus foncé */}
-      <div
-        className="absolute top-0 left-0 w-full h-full bg-black opacity-90"
-        aria-hidden="true"
-      ></div>
-
-      {/* Contenu principal */}
-      <div></div>
-      <div className="relative z-10 flex flex-col justify-center items-center text-center py-12 px-6 space-y-6">
-        <h1
-          className="text-4xl font-semibold mb-4 text-white"
-          style={{ color: "#fff" }}
-        >
-          À propos d'Animania
-        </h1>
-        <p
-          className="text-lg leading-relaxed text-justify max-w-4xl text-white"
-          style={{ lineHeight: "1.6" }}
-        >
-          Bienvenue sur <span className="text-green-600">Animania</span>, un
-          blog créé par quatre étudiants en ingénierie informatique passionnés
-          par la technologie et le développement web. Notre objectif est de
-          partager nos connaissances, nos projets et nos découvertes dans le
-          monde de l'informatique, plus spécifiquement dans les domaines du
-          développement
-          <span className="text-green-600"> backend</span> et{" "}
-          <span className="text-green-600">frontend</span>. Notre projet utilise{" "}
-          <span className="text-green-600">Next.js</span> pour la gestion du
-          côté serveur et du côté client, avec une base de données
-          <span className="text-green-600"> MongoDB</span> pour stocker les
-          informations, et un design moderne grâce à{" "}
-          <span className="text-green-600">Tailwind CSS</span>.
-        </p>
-
-        <section className="mt-16">
-          <h2 className="text-3xl font-bold text-white mb-8 text-center">
-            L'équipe d'Animania
-          </h2>
-
-          <div className="grid md:grid-cols-2 gap-8">
-            {/* Carte de membre d'équipe */}
-            <div className="bg-white rounded-xl shadow-md p-6 hover:shadow-lg transition-shadow">
-              <div className="flex items-center mb-4">
-                <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center">
-                  <span className="text-2xl text-green-600">M</span>
-                </div>
-                <div className="ml-4">
-                  <h3 className="text-xl font-semibold text-gray-800">Mehdi</h3>
-                  <p className="text-green-600">Développeur Backend</p>
-                </div>
-              </div>
-              <p className="text-gray-600">
-                Expert en MongoDB et APIs Next.js, passionné par l'optimisation
-                et la performance des systèmes.
-              </p>
-            </div>
-
-            <div className="bg-white rounded-xl shadow-md p-6 hover:shadow-lg transition-shadow">
-              <div className="flex items-center mb-4">
-                <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center">
-                  <span className="text-2xl text-green-600">G</span>
-                </div>
-                <div className="ml-4">
-                  <h3 className="text-xl font-semibold text-gray-800">
-                    Geremy
-                  </h3>
-                  <p className="text-green-600">Développeur Backend</p>
-                </div>
-              </div>
-              <p className="text-gray-600">
-                Spécialiste des structures de données et de la sécurité des
-                APIs.
-              </p>
-            </div>
-
-            <div className="bg-white rounded-xl shadow-md p-6 hover:shadow-lg transition-shadow">
-              <div className="flex items-center mb-4">
-                <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center">
-                  <span className="text-2xl text-green-600">K</span>
-                </div>
-                <div className="ml-4">
-                  <h3 className="text-xl font-semibold text-gray-800">Kelly</h3>
-                  <p className="text-green-600">Développeuse Frontend</p>
-                </div>
-              </div>
-              <p className="text-gray-600">
-                Créatrice d'interfaces utilisateur intuitives et attractives.
-              </p>
-            </div>
-
-            <div className="bg-white rounded-xl shadow-md p-6 hover:shadow-lg transition-shadow">
-              <div className="flex items-center mb-4">
-                <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center">
-                  <span className="text-2xl text-green-600">S</span>
-                </div>
-                <div className="ml-4">
-                  <h3 className="text-xl font-semibold text-gray-800">
-                    Sébastien
-                  </h3>
-                  <p className="text-green-600">Développeur Frontend</p>
-                </div>
-              </div>
-              <p className="text-gray-600">
-                Expert en animations et design responsive.
-              </p>
-            </div>
+    <>
+      <Header />
+      <main className="min-h-screen bg-gradient-to-b from-green-50 to-green-100 py-12 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-16">
+            <h1 className="text-4xl font-bold text-gray-900 mb-4">À Propos</h1>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              Explorez notre univers et découvrez comment nous contribuons à
+              partager la connaissance sur le monde animal.
+            </p>
           </div>
-        </section>
 
-        <h2 className="text-2xl font-semibold mt-6 text-white">
-          Pourquoi Animania ?
-        </h2>
-        <p className="text-lg leading-relaxed text-justify max-w-4xl text-white">
-          Animania est né de notre volonté de partager nos expériences et nos
-          projets tout en améliorant nos compétences en développement web. Nous
-          avons choisi d'utiliser{" "}
-          <span className="text-green-500">Next.js</span> pour sa flexibilité,
-          sa rapidité et sa capacité à gérer à la fois le côté serveur et le
-          côté client de notre application. En intégrant{" "}
-          <span className="text-green-500">MongoDB</span>, nous pouvons
-          facilement gérer et manipuler nos données, et avec{" "}
-          <span className="text-green-500">Tailwind CSS</span>, nous avons
-          l'opportunité de créer un design réactif et moderne.
-        </p>
-        <p className="text-lg leading-relaxed text-justify max-w-4xl text-white">
-          Ce blog est également un moyen pour nous de partager nos
-          connaissances, nos défis et nos succès tout au long de notre parcours.
-          Vous y trouverez des articles techniques, des tutoriels, ainsi que des
-          réflexions sur des sujets liés à la programmation, au développement
-          web et aux technologies émergentes.
-        </p>
+          {/* Section Mission */}
+          <section className="bg-white rounded-xl shadow-lg p-8 mb-12">
+            <h2 className="text-2xl font-semibold text-gray-900 mb-6">
+              Notre Mission
+            </h2>
+            <p className="text-gray-600 leading-relaxed mb-6">
+              Nous nous engageons à fournir des informations précises et à jour
+              sur le monde animal, tout en créant une communauté passionnée par
+              la protection et le bien-être des animaux.
+            </p>
+          </section>
 
-        <h2 className="text-2xl font-semibold mt-6 text-white">
-          Rejoignez-nous
-        </h2>
-        <p className="text-lg leading-relaxed text-justify max-w-4xl text-white">
-          Nous vous invitons à suivre notre aventure et à explorer nos articles.
-          N'hésitez pas à nous contacter ou à laisser un commentaire si vous
-          avez des questions, des suggestions ou des idées de collaboration.
-          Vous pouvez également nous suivre sur les réseaux sociaux pour être au
-          courant de nos dernières mises à jour.
-        </p>
-        <button className="px-6 py-3 border-2 border-white text-white rounded-lg hover:bg-green-600 transition-colors">
-          Nous contacter
-        </button>
-      </div>
+          {/* Sections de navigation */}
+          <div className="grid md:grid-cols-3 gap-8">
+            {aboutSections.map((section) => (
+              <Link
+                key={section.title}
+                href={section.link}
+                className="bg-white rounded-xl shadow-lg p-8 transform transition-all duration-300 hover:scale-105 hover:shadow-xl border-t-4 border-green-500"
+              >
+                <div className="text-center mb-4">
+                  <span className="text-4xl mb-4 block">{section.icon}</span>
+                  <h3 className="text-xl font-semibold text-gray-900 mb-3">
+                    {section.title}
+                  </h3>
+                </div>
+                <p className="text-gray-600 text-center">
+                  {section.description}
+                </p>
+              </Link>
+            ))}
+          </div>
+
+          {/* Section Valeurs */}
+          <section className="mt-12 bg-white rounded-xl shadow-lg p-8">
+            <h2 className="text-2xl font-semibold text-gray-900 mb-6">
+              Nos Valeurs
+            </h2>
+            <div className="grid md:grid-cols-3 gap-8">
+              <div>
+                <h3 className="text-xl font-semibold text-green-600 mb-4">
+                  Respect
+                </h3>
+                <p className="text-gray-600 leading-relaxed">
+                  Nous promouvons le respect de toutes les formes de vie et de
+                  leur habitat naturel.
+                </p>
+              </div>
+              <div>
+                <h3 className="text-xl font-semibold text-green-600 mb-4">
+                  Éducation
+                </h3>
+                <p className="text-gray-600 leading-relaxed">
+                  Nous croyons en la puissance de l'éducation pour sensibiliser
+                  aux enjeux de la protection animale.
+                </p>
+              </div>
+              <div>
+                <h3 className="text-xl font-semibold text-green-600 mb-4">
+                  Innovation
+                </h3>
+                <p className="text-gray-600 leading-relaxed">
+                  Nous utilisons les technologies modernes pour rendre
+                  l'information accessible et engageante.
+                </p>
+              </div>
+            </div>
+          </section>
+        </div>
+      </main>
       <Footer />
-    </div>
+    </>
   );
 }
