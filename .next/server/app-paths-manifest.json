@@ -1,8 +1,4 @@
 {
-  "/favicon.ico/route": "app/favicon.ico/route.js",
-  "/a-propos/qui-sommes-nous/page": "app/a-propos/qui-sommes-nous/page.js",
-  "/connexion/page": "app/connexion/page.js",
-  "/page": "app/page.js",
-  "/a-propos/notre-equipe/page": "app/a-propos/notre-equipe/page.js",
-  "/a-propos/contact/page": "app/a-propos/contact/page.js"
+  "/a-propos/page": "app/a-propos/page.js",
+  "/page": "app/page.js"
 }
