@@ -6,16 +6,26 @@
       "static/css/app/layout.css",
       "static/chunks/app/layout.js"
     ],
-    "/formulaire_post/page": [
+    "/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/css/app/formulaire_post/page.css",
-      "static/chunks/app/formulaire_post/page.js"
+      "static/chunks/app/page.js"
     ],
-    "/api/Post/route": [
+    "/a-propos/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/api/Post/route.js"
+      "static/chunks/app/a-propos/page.js"
+    ],
+    "/connexion/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/css/app/connexion/page.css",
+      "static/chunks/app/connexion/page.js"
+    ],
+    "/api/auth/login/route": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/api/auth/login/route.js"
     ]
   }
 }
