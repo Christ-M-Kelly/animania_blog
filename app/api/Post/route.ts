@@ -5,12 +5,6 @@ import { handleUpload } from "@/app/upload/uploadActions";
 export async function POST(request: Request) {
   try {
     const formData = await request.formData();
-    console.log("Données reçues:", {
-      title: formData.get("title"),
-      content: formData.get("content"),
-      published: formData.get("published"),
-      image: formData.get("image"),
-    });
     const title = formData.get("title") as string;
     const content = formData.get("content") as string;
     const published = formData.get("published") === "true";
@@ -52,7 +46,6 @@ export async function POST(request: Request) {
       );
     }
 
-    // Création du post dans la base de données
     const post = await prisma.post.create({
       data: {
         title,
