@@ -26,12 +26,16 @@ export default function CommentSection({ postId, initialComments }: CommentSecti
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { getToken, getUser } = useAuth();
   const pathname = usePathname();
+
+  // Vérifier l'état de connexion à chaque rendu
   const token = getToken();
   const user = getUser();
+  const isAuthenticated = !!token && !!user;
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!user || !token) {
+
+    if (!isAuthenticated) {
       toast.error('Veuillez vous connecter pour commenter');
       return;
     }
@@ -77,7 +81,7 @@ export default function CommentSection({ postId, initialComments }: CommentSecti
     <div className="space-y-6">
       <h3 className="text-2xl font-bold mb-6">Commentaires</h3>
       
-      {user ? (
+      {isAuthenticated ? (
         <form onSubmit={handleSubmit} className="mb-8 space-y-4">
           <textarea
             value={newComment}

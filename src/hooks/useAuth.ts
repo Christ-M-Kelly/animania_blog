@@ -16,14 +16,23 @@ export function useAuth() {
   const getUser = (): User | null => {
     if (typeof window !== 'undefined') {
       const userStr = localStorage.getItem('user');
-      return userStr ? JSON.parse(userStr) : null;
+      try {
+        return userStr ? JSON.parse(userStr) : null;
+      } catch (error) {
+        console.error('Erreur lors de la lecture des données utilisateur:', error);
+        return null;
+      }
     }
     return null;
   };
 
   const login = (userData: User, token: string) => {
-    localStorage.setItem('user', JSON.stringify(userData));
-    localStorage.setItem('token', token);
+    try {
+      localStorage.setItem('user', JSON.stringify(userData));
+      localStorage.setItem('token', token);
+    } catch (error) {
+      console.error('Erreur lors de la sauvegarde des données:', error);
+    }
   };
 
   const logout = () => {
@@ -32,7 +41,7 @@ export function useAuth() {
   };
 
   const isAuthenticated = () => {
-    return !!getToken();
+    return !!getToken() && !!getUser();
   };
 
   return {
