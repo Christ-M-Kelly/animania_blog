@@ -1,6 +1,7 @@
 import Header from "../src/components/Header";
 import Footer from "../src/components/Footer";
 import { prisma } from "./db/prisma";
+import Link from "next/link";
 
 export default async function Home() {
   const posts = await prisma.post.findMany({
@@ -63,41 +64,37 @@ export default async function Home() {
             </h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
               {posts.map((post) => (
-                <div
-                  key={post.id}
-                  className="bg-white shadow-md rounded-lg overflow-hidden hover:shadow-lg transition-shadow duration-300 flex flex-col"
-                >
-                  <div className="aspect-[16/9] relative overflow-hidden">
-                    <img
-                      src={
-                        post.imageUrl || "https://via.placeholder.com/300x180"
-                      }
-                      alt={post.title}
-                      className="w-full h-full object-contain bg-gray-100"
-                    />
-                  </div>
-                  <div className="p-6 flex-1 flex flex-col">
-                    <div className="flex justify-between items-center mb-2">
-                      <div className="text-green-600 font-semibold text-sm uppercase">
-                        {new Date(post.createdAt).toLocaleDateString("fr-FR", {
-                          year: "numeric",
-                          month: "long",
-                          day: "numeric",
-                        })}
+                <Link href={`/posts/${post.id}`} key={post.id}>
+                  <div className="bg-white shadow-md rounded-lg overflow-hidden hover:shadow-lg transition-shadow duration-300 flex flex-col cursor-pointer">
+                    <div className="aspect-[16/9] relative overflow-hidden bg-gray-100 p-4 flex items-center justify-center">
+                      <img
+                        src={post.imageUrl || "https://via.placeholder.com/300x180"}
+                        alt={post.title}
+                        className="max-h-[200px] w-auto object-contain"
+                      />
+                    </div>
+                    <div className="p-6 flex-1 flex flex-col">
+                      <div className="flex justify-between items-center mb-2">
+                        <div className="text-green-600 font-semibold text-sm uppercase">
+                          {new Date(post.createdAt).toLocaleDateString("fr-FR", {
+                            year: "numeric",
+                            month: "long",
+                            day: "numeric",
+                          })}
+                        </div>
+                        <div className="text-gray-600 text-sm">
+                          Par {post.author.name}
+                        </div>
                       </div>
-                      <div className="text-gray-600 text-sm">
-                        Par {post.author.name}
+                      <h3 className="text-xl font-bold text-green-500 mb-3 hover:text-green-600 transition-colors duration-300">
+                        {post.title}
+                      </h3>
+                      <div className="prose max-w-none text-gray-600 line-clamp-3">
+                        {post.content}
                       </div>
                     </div>
-                    <h3 className="text-xl font-bold text-gray-800 mb-3 hover:text-green-700 transition-colors duration-300">
-                      {post.title}
-                    </h3>
-                    <div
-                      className="prose max-w-none text-gray-600"
-                      dangerouslySetInnerHTML={{ __html: post.content }}
-                    />
                   </div>
-                </div>
+                </Link>
               ))}
             </div>
           </div>
