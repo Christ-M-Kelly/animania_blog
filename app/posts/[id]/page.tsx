@@ -3,6 +3,7 @@ import { prisma } from "@/app/db/prisma";
 import Header from "@/src/components/Header";
 import Footer from "@/src/components/Footer";
 import Link from "next/link";
+import CommentSection from "@/src/components/CommentSection";
 
 export default async function PostPage({ params }: { params: { id: string } }) {
   const post = await prisma.post.findUnique({
@@ -81,6 +82,14 @@ export default async function PostPage({ params }: { params: { id: string } }) {
               <div className="prose prose-green max-w-none">
                 {post.content}
               </div>
+            </div>
+          </div>
+          <div className="border-t mt-8">
+            <div className="p-6 sm:p-8">
+              <CommentSection 
+                postId={post.id} 
+                initialComments={post.comments} 
+              />
             </div>
           </div>
         </article>
