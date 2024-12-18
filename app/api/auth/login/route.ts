@@ -1,6 +1,7 @@
 import { prisma } from "@/app/db/prisma";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
+import { NextResponse } from "next/server";
 
 export async function POST(req: Request) {
   try {
@@ -38,15 +39,14 @@ export async function POST(req: Request) {
     );
 
     // Inclure les informations de l'utilisateur dans la réponse
-    return new Response(
-      JSON.stringify({
-        success: true,
-        message: "Connecté !",
-        token,
-        user: { name: user.name, email: user.email },
-      }),
-      { status: 200 }
-    );
+    return NextResponse.json({
+      success: true,
+      user: {
+        name: user.name,
+        email: user.email
+      },
+      token: token
+    });
   } catch (error) {
     console.error("Erreur interne:", error); // Ajout du log pour les erreurs serveur
     return new Response(

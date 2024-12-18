@@ -1,27 +1,31 @@
 "use client";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import React, { useState } from "react";
-import { useRouter } from "next/navigation"; // Importer useRouter pour la redirection
-import { toast, ToastContainer } from "react-toastify"; // Importer toast et ToastContainer
-import "react-toastify/dist/ReactToastify.css"; // Importation des styles de notifications
+import { useAuth } from '@/src/hooks/useAuth';
+import { useRouter, useSearchParams } from "next/navigation";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import C_Footer from "./C_Footer";
 
 export default function Connexion() {
-  // États pour gérer l'email, le mot de passe, l'erreur et la visibilité du mot de passe
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-  const [showPassword, setShowPassword] = useState(false); // Affichage du mot de passe
-  const router = useRouter(); // Hook pour la redirection
+  const [showPassword, setShowPassword] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const returnUrl = searchParams.get('returnUrl') || '/';
+  const { login } = useAuth();
 
   const togglePasswordVisibility = () => {
-    setShowPassword(!showPassword); // Bascule entre afficher et masquer
+    setShowPassword(!showPassword);
   };
 
-  // Fonction pour gérer la soumission du formulaire
   const handleSubmit = async (event: React.FormEvent) => {
-    event.preventDefault(); // Empêche le rafraîchissement de la page
-    setError(""); // Réinitialiser l'erreur avant d'envoyer la requête
+    event.preventDefault();
+    setError("");
+    setIsLoading(true);
 
     try {
       const response = await fetch("/api/auth/login", {
@@ -35,34 +39,31 @@ export default function Connexion() {
       const data = await response.json();
 
       if (!response.ok) {
-        // Si la réponse n'est pas correcte, afficher l'erreur
         setError(data.message);
       } else {
-        // Afficher dans la console le token généré
-        console.log("Token généré : ", data.token);
+        if (!data.user?.name || !data.token) {
+          throw new Error('Données de connexion invalides');
+        }
 
-        // Afficher dans la console le nom de l'utilisateur
-        console.log("Nom de l'utilisateur : ", data.user.name); // Afficher le nom de l'utilisateur dans la console
-
-        // Afficher la notification de bienvenue
-        toast.success(`Bonjour, ${data.user.name}!`);
-
-        // Sauvegarder le nom de l'utilisateur et le token dans le localStorage
-        localStorage.setItem("userName", data.user.name);
-        localStorage.setItem("token", data.token);
-
-        // Rediriger vers la page d'accueil (ou la page que vous souhaitez)
-        router.push("/");
+        const userData = {
+          name: data.user.name,
+          email: data.user.email
+        };
+        
+        login(userData, data.token);
+        toast.success(`Bonjour, ${userData.name} !`);
+        router.push(decodeURIComponent(returnUrl));
       }
     } catch (error) {
       console.error("Erreur lors de la soumission:", error);
       setError("Une erreur est survenue. Veuillez réessayer.");
+    } finally {
+      setIsLoading(false);
     }
   };
 
   return (
     <div>
-      {/* Intégration des notifications */}
       <ToastContainer />
       <main className="min-h-screen flex flex-col items-center pt-32 pb-32 bg-gradient-to-b from-green-50 to-green-100 relative">
         <div className="bg-white p-6 sm:p-8 md:p-20 rounded-xl shadow-2xl w-[90%] sm:w-[30rem] md:w-[35rem] lg:w-[40rem] backdrop-blur-sm bg-opacity-90 relative z-10">
@@ -99,7 +100,7 @@ export default function Connexion() {
               </label>
               <div className="relative">
                 <input
-                  type={showPassword ? "text" : "password"} // Change le type d'entrée en fonction de la visibilité
+                  type={showPassword ? "text" : "password"}
                   id="password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
@@ -113,7 +114,7 @@ export default function Connexion() {
                   className="absolute right-3 top-1/2 transform -translate-y-1/2 text-green-600"
                 >
                   <i
-                    className={`fas ${showPassword ? "fa-eye-slash" : "fa-eye"}`} // Icône d'œil pour afficher/masquer
+                    className={`fas ${showPassword ? "fa-eye-slash" : "fa-eye"}`}
                   ></i>
                 </button>
               </div>
