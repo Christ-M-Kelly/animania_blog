@@ -93,7 +93,10 @@ export default function Header({ className }: HeaderProps) {
     return false;
   };
 
-  const userName = isClient ? localStorage.getItem("userName") : null;
+  const user = isClient
+    ? JSON.parse(localStorage.getItem("user") || "null")
+    : null;
+  const userName = user?.name || "Utilisateur";
 
   // Vérification de l'état de l'authentification
   const isAuthenticated = isTokenValid();
@@ -155,7 +158,7 @@ export default function Header({ className }: HeaderProps) {
 
   // Fonction de déconnexion
   const handleLogout = () => {
-    localStorage.removeItem("userName");
+    localStorage.removeItem("user");
     localStorage.removeItem("token");
     window.location.reload(); // Recharger la page pour mettre à jour l'interface
   };

@@ -10,10 +10,17 @@ export async function POST(req: Request) {
     // Vérifier si l'utilisateur existe
     const user = await prisma.user.findUnique({
       where: { email },
+      select: {
+        id: true,
+        email: true,
+        password: true,
+        name: true,
+        role: true,
+      },
     });
 
     if (!user) {
-      console.error(`Utilisateur avec l'email ${email} non trouvé`); // Log utile pour déboguer
+      console.error(`Utilisateur avec l'email ${email} non trouvé`);
       return new Response(
         JSON.stringify({ success: false, message: "Utilisateur non trouvé." }),
         { status: 401 }
@@ -33,7 +40,12 @@ export async function POST(req: Request) {
 
     // Générer un token JWT
     const token = jwt.sign(
-      { id: user.id, email: user.email, role: user.role },
+      {
+        id: user.id,
+        email: user.email,
+        name: user.name,
+        role: user.role,
+      },
       process.env.JWT_SECRET as string,
       { expiresIn: "1h" }
     );
@@ -42,10 +54,12 @@ export async function POST(req: Request) {
     return NextResponse.json({
       success: true,
       user: {
+        id: user.id,
         name: user.name,
-        email: user.email
+        email: user.email,
+        role: user.role,
       },
-      token: token
+      token: token,
     });
   } catch (error) {
     console.error("Erreur interne:", error); // Ajout du log pour les erreurs serveur
