@@ -31,6 +31,7 @@ model Post {
   authorId    String   @db.ObjectId
   comments    Comment[]
   imageUrl    String?
+  category    AnimalCategory @default(TERRESTRES)
 }
 
 model Comment {
@@ -53,4 +54,11 @@ model ViewStats {
 enum Role {
   USER
   ADMIN
+}
+
+enum AnimalCategory {
+  MARINS        @map("animaux marins")
+  TERRESTRES    @map("animaux terrestres")
+  AERIENS       @map("animaux aériens")
+  EAU_DOUCE     @map("animaux d'eau douce")
 }
