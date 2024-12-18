@@ -15,6 +15,7 @@
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
       "static/chunks/app/profil/formulaire_post/page.js"
+<<<<<<< HEAD
     ],
     "/api/Post/route": [
       "static/chunks/webpack.js",
@@ -56,6 +57,8 @@
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
       "static/chunks/app/api/auth/login/route.js"
+=======
+>>>>>>> 31e6ee46f0c9edf6b8e3314b90c4864de53ef32f
     ]
   }
 }

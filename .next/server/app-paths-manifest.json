@@ -1,6 +1,11 @@
 {
+<<<<<<< HEAD
   "/a-propos/page": "app/a-propos/page.js",
   "/posts/[id]/page": "app/posts/[id]/page.js",
   "/connexion/page": "app/connexion/page.js",
   "/page": "app/page.js"
+=======
+  "/page": "app/page.js",
+  "/profil/formulaire_post/page": "app/profil/formulaire_post/page.js"
+>>>>>>> 31e6ee46f0c9edf6b8e3314b90c4864de53ef32f
 }
