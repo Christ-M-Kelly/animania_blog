@@ -14,38 +14,32 @@ export default function C_Footer() {
     { name: "Contact", href: "/contact" },
   ];
 
-  const handleLinkClick = () => {
-    // Gérer le clic sur les liens si nécessaire
-  };
-
   return (
-    <footer className="bg-green-600 py-4">
+    <footer className="bg-gradient-to-b from-green-700 to-green-900 py-6 fixed bottom-0 w-full">
       <div className="container mx-auto px-4">
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div className="flex flex-row items-center justify-between">
           <Link
             href="/"
-            onClick={handleLinkClick}
             className="flex items-center space-x-3 hover:opacity-90 transition-opacity"
           >
-            <div className="relative w-10 h-10">
-              <Image
-                src="/images/logo_rbg.png"
-                alt="Logo Animania"
-                fill
-                sizes="40px"
-                className="rounded-full bg-white p-1 shadow-md hover:scale-105 transition-transform duration-300 object-cover"
-              />
-            </div>
-            <span className="text-lg font-bold text-white">Animania</span>
+            <Image
+              src="/images/logo_rbg.png"
+              alt="Logo Animania - Où chaque créature raconte une histoire"
+              width={60}
+              height={60}
+              className="rounded-full border-2 border-green-700 shadow-lg hover:scale-105 transition-transform duration-300 bg-white"
+            />
+            <h3 className="text-xl font-bold text-white font-serif">
+              Animania
+            </h3>
           </Link>
           <nav>
-            <ul className="flex flex-row space-x-8">
+            <ul className="flex flex-row space-x-6">
               {navLinks.map((link) => (
                 <li key={link.name}>
                   <Link
                     href={link.href}
-                    onClick={handleLinkClick}
-                    className="text-white hover:text-green-200 text-sm font-medium transition-colors duration-200"
+                    className="text-gray-300 hover:text-green-300 hover:underline transition-colors duration-200"
                   >
                     {link.name}
                   </Link>

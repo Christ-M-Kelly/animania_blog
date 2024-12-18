@@ -1,11 +1,7 @@
-import { put } from "@vercel/blob";
+import { upload } from "@vercel/blob";
 
-interface FileWithName extends Blob {
-  name: string;
-}
-
-export async function uploadImage(file: FileWithName): Promise<string> {
-  const { url } = await put(file.name, file, {
+export async function uploadImage(file: Blob): Promise<string> {
+  const { url } = await upload(file, {
     access: "public",
     contentType: file.type,
   });

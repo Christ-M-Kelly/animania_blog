@@ -12,7 +12,7 @@ export const prisma =
     log:
       process.env.NODE_ENV === "development"
         ? ["query", "info", "warn", "error"] // Log supplémentaire pour le développement
-        : [], // Moins de logs en production
+        : ["error"], // Moins de logs en production
   });
 
 // Assurez-vous que Prisma n'est pas réinitialisé à chaque rechargement en développement

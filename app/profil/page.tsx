@@ -1,12 +1,3 @@
-<<<<<<< HEAD
-export default function ProfilePage() {
-  return (
-    <div>
-      <h1>Profil</h1>
-    </div>
-  );
-}
-=======
 import Header from "@/src/components/Header";
 import Footer from "@/src/components/Footer";
 
@@ -39,4 +30,3 @@ export default function ProfilePage() {
       </div>
     );
   }
->>>>>>> 9921e56791f295046394212f689cf08f0dfe9e45

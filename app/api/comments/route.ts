@@ -1,59 +1,34 @@
-import { NextResponse } from "next/server";
-import { PrismaClient } from "@prisma/client";
-import jwt, { JwtPayload } from "jsonwebtoken";
+import { verifyToken } from "@/app/api/utils/auth";
+import { prisma } from "../../db/prisma";
+import { NextRequest, NextResponse } from "next/server";
 
-const prisma = new PrismaClient();
-
-interface DecodedToken extends JwtPayload {
-  email: string;
-  id: string;
-}
-
-async function verifyToken(token: string): Promise<DecodedToken | null> {
+export async function POST(req: NextRequest) {
   try {
-    const decoded = jwt.verify(
-      token,
-      process.env.JWT_SECRET as string
-    ) as DecodedToken;
-    return decoded;
-  } catch {
-    return null;
-  }
-}
-
-export async function POST(request: Request) {
-  const authHeader = request.headers.get("Authorization");
-  const token = authHeader?.split(" ")[1];
-
-  if (!token) {
-    return NextResponse.json({ error: "Non autorisé" }, { status: 401 });
-  }
-
-  const decoded = await verifyToken(token);
-  if (!decoded) {
-    return NextResponse.json({ error: "Token invalide" }, { status: 401 });
-  }
-
-  try {
-    const user = await prisma.user.findUnique({
-      where: { email: decoded.email },
-    });
-
-    if (!user) {
-      return NextResponse.json({ error: "Non autorisé" }, { status: 401 });
+    const authHeader = req.headers.get("authorization");
+    if (!authHeader) {
+      return NextResponse.json(
+        { success: false, message: "Non autorisé" },
+        { status: 401 }
+      );
     }
 
-    const { content, postId } = await request.json();
+    const token = authHeader.split(" ")[1];
+    const decoded = verifyToken(token);
+
+    if (!decoded || typeof decoded !== "object" || !("id" in decoded)) {
+      return NextResponse.json(
+        { success: false, message: "Token invalide" },
+        { status: 401 }
+      );
+    }
+
+    const { content, postId } = await req.json();
 
     const comment = await prisma.comment.create({
       data: {
         content: content.trim(),
-        post: {
-          connect: { id: postId },
-        },
-        author: {
-          connect: { id: user.id },
-        },
+        authorId: decoded.id as string,
+        postId,
       },
       include: {
         author: {
@@ -64,12 +39,21 @@ export async function POST(request: Request) {
       },
     });
 
-    return NextResponse.json(comment, { status: 201 });
+    return NextResponse.json(
+      { 
+        success: true, 
+        comment: {
+          ...comment,
+          createdAt: comment.createdAt.toISOString()
+        }
+      },
+      { status: 201 }
+    );
   } catch (error) {
     console.error("Erreur création commentaire:", error);
     return NextResponse.json(
-      { error: "Erreur interne du serveur" },
+      { success: false, message: "Erreur interne du serveur" },
       { status: 500 }
     );
   }
-}
+} 

@@ -4,17 +4,12 @@ import Header from "@/src/components/Header";
 import Footer from "@/src/components/Footer";
 import Link from "next/link";
 import CommentSection from "@/src/components/CommentSection";
-import FormattedDate from "@/src/components/FormattedDate";
 
-interface PageProps {
-  params: Promise<{ id: string }>;
-}
-
-export default async function PostPage({ params }: PageProps) {
-  const { id } = await params;
-
+export default async function PostPage({ params }: { params: { id: string } }) {
   const post = await prisma.post.findUnique({
-    where: { id },
+    where: {
+      id: params.id,
+    },
     include: {
       author: {
         select: {
@@ -46,22 +41,10 @@ export default async function PostPage({ params }: PageProps) {
       <main className="flex-grow bg-gray-50">
         <article className="max-w-4xl mx-auto px-4 py-12">
           <Link
-            href="/articles"
+            href="/"
             className="text-green-600 hover:text-green-700 mb-6 inline-flex items-center gap-2"
           >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="20"
-              height="20"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <path d="M19 12H5M12 19l-7-7 7-7" />
-            </svg>
+            <i className="fas fa-arrow-left"></i>
             Retour aux articles
           </Link>
 
@@ -88,24 +71,22 @@ export default async function PostPage({ params }: PageProps) {
                 </span>
                 <span>
                   <i className="far fa-calendar mr-2"></i>
-                  <FormattedDate date={post.createdAt.toISOString()} />
+                  {new Date(post.createdAt).toLocaleDateString("fr-FR", {
+                    day: "numeric",
+                    month: "long",
+                    year: "numeric",
+                  })}
                 </span>
               </div>
 
-              <div
-                className="prose prose-green max-w-none"
-                dangerouslySetInnerHTML={{ __html: post.content }}
-              />
+              <div className="prose prose-green max-w-none">{post.content}</div>
             </div>
           </div>
           <div className="border-t mt-8">
             <div className="p-6 sm:p-8">
               <CommentSection
                 postId={post.id}
-                initialComments={post.comments.map((comment) => ({
-                  ...comment,
-                  createdAt: comment.createdAt.toISOString(),
-                }))}
+                initialComments={post.comments}
               />
             </div>
           </div>

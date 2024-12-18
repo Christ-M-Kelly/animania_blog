@@ -6,7 +6,6 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Header from "@/src/components/Header";
 import Footer from "@/src/components/Footer";
-import { AnimalCategory } from "@prisma/client";
 
 const MenuBar = ({ editor }: { editor: Editor | null }) => {
   if (!editor) {
@@ -51,9 +50,6 @@ export default function FormulairePage() {
   const [loading, setLoading] = useState(false);
   const [preview, setPreview] = useState<string | null>(null);
   const [isDraft, setIsDraft] = useState(true);
-  const [category, setCategory] = useState<AnimalCategory>(
-    AnimalCategory.TERRESTRES
-  );
 
   const editor = useEditor({
     extensions: [StarterKit],
@@ -86,7 +82,6 @@ export default function FormulairePage() {
       formData.append("title", title);
       formData.append("content", editor?.getHTML() || "");
       formData.append("published", (!isDraft).toString());
-      formData.append("category", category);
       if (file) {
         formData.append("image", file);
       }
@@ -152,29 +147,6 @@ export default function FormulairePage() {
                     className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
                     required
                   />
-                </div>
-
-                <div>
-                  <label className="block text-gray-700 font-semibold mb-2">
-                    Catégorie
-                  </label>
-                  <select
-                    value={category}
-                    onChange={(e) =>
-                      setCategory(e.target.value as AnimalCategory)
-                    }
-                    className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
-                    required
-                  >
-                    {Object.values(AnimalCategory).map((cat) => (
-                      <option key={cat} value={cat}>
-                        {cat === "TERRESTRES" && "Animaux terrestres"}
-                        {cat === "MARINS" && "Animaux marins"}
-                        {cat === "AERIENS" && "Animaux aériens"}
-                        {cat === "EAU_DOUCE" && "Animaux d'eau douce"}
-                      </option>
-                    ))}
-                  </select>
                 </div>
 
                 <div>

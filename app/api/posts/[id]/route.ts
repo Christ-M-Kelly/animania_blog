@@ -1,37 +1,56 @@
 import { prisma } from "../../../db/prisma";
+import { NextRequest, NextResponse } from "next/server";
 
-type Context = {
-  params: Promise<{ id: string }>;
-};
-
-export async function GET(request: Request, context: Context) {
-  const { id } = await context.params;
-
+export async function GET(
+  request: NextRequest,
+  { params }: { params: { id: string } }
+) {
   try {
     const post = await prisma.post.findUnique({
-      where: { id },
+      where: {
+        id: params.id,
+      },
       include: {
         author: {
-          select: { name: true },
+          select: {
+            name: true,
+          },
         },
         comments: {
           include: {
             author: {
-              select: { name: true },
+              select: {
+                name: true,
+              },
             },
           },
-          orderBy: { createdAt: "desc" },
+          orderBy: {
+            createdAt: 'desc',
+          },
         },
       },
     });
 
     if (!post) {
-      return new Response(null, { status: 404 });
+      return NextResponse.json(
+        { success: false, message: "Post non trouvé" },
+        { status: 404 }
+      );
     }
 
-    return Response.json(post);
+    return NextResponse.json({
+      ...post,
+      createdAt: post.createdAt.toISOString(),
+      comments: post.comments.map(comment => ({
+        ...comment,
+        createdAt: comment.createdAt.toISOString(),
+      })),
+    });
   } catch (error) {
     console.error("Erreur récupération post:", error);
-    return new Response(null, { status: 500 });
+    return NextResponse.json(
+      { success: false, message: "Erreur interne du serveur" },
+      { status: 500 }
+    );
   }
-}
+} 
