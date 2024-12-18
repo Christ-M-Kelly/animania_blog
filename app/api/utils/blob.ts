@@ -7,6 +7,7 @@ interface FileWithName extends Blob {
 export async function uploadImage(file: FileWithName): Promise<string> {
   const { url } = await put(file.name, file, {
     access: "public",
+    contentType: file.type,
   });
   return url;
 }
