@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import C_Footer from "./C_Footer";
 import Link from "next/link";
 import { setAuthToken } from "@/app/api/utils/auth";
+import { useErrorHandler } from "@/src/hooks/useErrorHandler";
 
 export default function Connexion() {
   const [email, setEmail] = useState("");
@@ -12,6 +13,7 @@ export default function Connexion() {
   const [error, setError] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const router = useRouter();
+  const { handleError } = useErrorHandler();
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -29,14 +31,23 @@ export default function Connexion() {
       const data = await response.json();
 
       if (data.success) {
-        setAuthToken(data.token);
-        localStorage.setItem("user", JSON.stringify(data.user));
-        router.push("/");
+        try {
+          setAuthToken(data.token);
+          localStorage.setItem("user", JSON.stringify(data.user));
+          router.push("/");
+        } catch (authError) {
+          handleError(
+            authError,
+            "Erreur lors de la sauvegarde des données de connexion"
+          );
+          setError("Erreur lors de la connexion. Veuillez réessayer.");
+        }
       } else {
-        setError(data.message || "Une erreur est survenue");
+        handleError(new Error(data.message), "Échec de la connexion");
+        setError(data.message || "Email ou mot de passe incorrect");
       }
     } catch (err) {
-      console.error("Erreur de connexion:", err);
+      handleError(err, "Erreur lors de la tentative de connexion");
       setError("Une erreur est survenue lors de la connexion");
     }
   };

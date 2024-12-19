@@ -7,6 +7,8 @@ import { useRouter } from "next/navigation";
 import Header from "@/src/components/Header";
 import Footer from "@/src/components/Footer";
 import { AnimalCategory } from "@prisma/client";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const MenuBar = ({ editor }: { editor: Editor | null }) => {
   if (!editor) {
@@ -50,7 +52,6 @@ export default function FormulairePage() {
   const [file, setFile] = useState<File>();
   const [loading, setLoading] = useState(false);
   const [preview, setPreview] = useState<string | null>(null);
-  const [isDraft, setIsDraft] = useState(true);
   const [category, setCategory] = useState<AnimalCategory>(
     AnimalCategory.TERRESTRES
   );
@@ -77,15 +78,14 @@ export default function FormulairePage() {
     };
   }, [preview]);
 
-  const onSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleSubmit = async (isPublished: boolean) => {
     setLoading(true);
 
     try {
       const formData = new FormData();
       formData.append("title", title);
       formData.append("content", editor?.getHTML() || "");
-      formData.append("published", (!isDraft).toString());
+      formData.append("published", isPublished.toString());
       formData.append("category", category);
       if (file) {
         formData.append("image", file);
@@ -102,10 +102,18 @@ export default function FormulairePage() {
         );
       }
 
-      router.push("/");
-      router.refresh();
+      toast.success(
+        isPublished
+          ? "Article publié avec succès !"
+          : "Brouillon enregistré avec succès !"
+      );
+      setTimeout(() => {
+        router.push("/");
+        router.refresh();
+      }, 2000);
     } catch (error) {
       console.error("Erreur détaillée:", error);
+      toast.error("Une erreur est survenue lors de la publication.");
     } finally {
       setLoading(false);
     }
@@ -114,6 +122,7 @@ export default function FormulairePage() {
   return (
     <div className="min-h-screen flex flex-col">
       <Header />
+      <ToastContainer />
       <main className="flex-grow">
         {/* Hero Section */}
         <section className="relative bg-gradient-to-r from-green-600 to-green-800 py-16">
@@ -140,7 +149,7 @@ export default function FormulairePage() {
         <section className="py-12 bg-gray-50">
           <div className="max-w-4xl mx-auto px-4">
             <div className="bg-white rounded-lg shadow-lg p-8">
-              <form onSubmit={onSubmit} className="space-y-6">
+              <div className="space-y-6">
                 <div>
                   <label className="block text-gray-700 font-semibold mb-2">
                     Titre
@@ -213,17 +222,17 @@ export default function FormulairePage() {
 
                 <div className="flex gap-4">
                   <button
-                    type="submit"
+                    type="button"
                     disabled={loading}
-                    onClick={() => setIsDraft(false)}
+                    onClick={() => handleSubmit(true)}
                     className="flex-1 bg-green-600 text-white py-3 rounded-lg hover:bg-green-700 transition-colors disabled:bg-gray-400"
                   >
                     {loading ? "Publication en cours..." : "Publier maintenant"}
                   </button>
                   <button
-                    type="submit"
+                    type="button"
                     disabled={loading}
-                    onClick={() => setIsDraft(true)}
+                    onClick={() => handleSubmit(false)}
                     className="flex-1 bg-gray-600 text-white py-3 rounded-lg hover:bg-gray-700 transition-colors disabled:bg-gray-400"
                   >
                     {loading
@@ -231,7 +240,7 @@ export default function FormulairePage() {
                       : "Enregistrer comme brouillon"}
                   </button>
                 </div>
-              </form>
+              </div>
             </div>
           </div>
         </section>

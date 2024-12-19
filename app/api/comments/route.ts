@@ -64,7 +64,7 @@ export async function POST(request: Request) {
       },
     });
 
-    return NextResponse.json(comment, { status: 201 });
+    return NextResponse.json({ comment }, { status: 201 });
   } catch (error) {
     console.error("Erreur création commentaire:", error);
     return NextResponse.json(

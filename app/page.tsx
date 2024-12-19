@@ -98,9 +98,10 @@ export default async function Home() {
                       <h3 className="text-xl font-bold text-green-500 mb-3 hover:text-green-600 transition-colors duration-300">
                         {post.title}
                       </h3>
-                      <div className="prose max-w-none text-gray-600 line-clamp-3">
-                        {post.content}
-                      </div>
+                      <div
+                        className="prose max-w-none text-gray-600 line-clamp-3"
+                        dangerouslySetInnerHTML={{ __html: post.content }}
+                      />
                     </div>
                   </div>
                 </Link>
