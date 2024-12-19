@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/app/db/prisma";
 import { handleUpload } from "@/app/upload/uploadActions";
+import { AnimalCategory } from "@prisma/client";
 
 export async function POST(request: Request) {
   try {
@@ -9,6 +10,7 @@ export async function POST(request: Request) {
     const content = formData.get("content") as string;
     const published = formData.get("published") === "true";
     const image = formData.get("image") as File;
+    const category = formData.get("category") as AnimalCategory;
 
     if (!title || !content) {
       return NextResponse.json(
@@ -52,6 +54,7 @@ export async function POST(request: Request) {
         content,
         published,
         imageUrl: imagePath,
+        category,
         slug: title.toLowerCase().replace(/ /g, "-") + "-" + Date.now(),
         author: {
           connect: { id: user.id },

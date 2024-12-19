@@ -21,6 +21,48 @@
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
       "static/chunks/app/articles/page.js"
+    ],
+    "/connexion/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/css/app/connexion/page.css",
+      "app/connexion/page.css",
+      "static/chunks/app/connexion/page.js"
+    ],
+    "/api/auth/login/route": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/api/auth/login/route.js"
+    ],
+    "/profil/formulaire_post/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/profil/formulaire_post/page.js"
+    ],
+    "/api/Post/route": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/api/Post/route.js"
+    ],
+    "/articles/animaux-aerien/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/articles/animaux-aerien/page.js"
+    ],
+    "/articles/animaux-marins/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/articles/animaux-marins/page.js"
+    ],
+    "/articles/animaux-terrestres/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/articles/animaux-terrestres/page.js"
+    ],
+    "/_not-found/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/_not-found/page.js"
     ]
   }
 }
