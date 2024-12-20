@@ -1,4 +1,6 @@
 "use client";
+import Header from "@/src/components/Header";
+import Footer from "@/src/components/Footer";
 
 import React, { useState } from "react";
 
@@ -56,7 +58,8 @@ export default function ContactForm() {
   };
 
   return (
-    <div className="fixed h-screen w-screen">
+    <div className=" h-screen w-screen">
+      <Header />
       {/* Vidéo en arrière-plan */}
       <video
         className="absolute top-0 left-0 h-full w-full object-cover"
@@ -240,7 +243,7 @@ export default function ContactForm() {
     Message envoyé avec succès !
   </div>
 )}
-
+    <Footer />
     </div>
   );
 }
