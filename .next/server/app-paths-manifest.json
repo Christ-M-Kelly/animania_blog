@@ -1,5 +1,8 @@
 {
-  "/profil/page": "app/profil/page.js",
-  "/connexion/page": "app/connexion/page.js",
-  "/page": "app/page.js"
+  "/favicon.ico/route": "app/favicon.ico/route.js",
+  "/api/posts/route": "app/api/posts/route.js",
+  "/api/comments/route": "app/api/comments/route.js",
+  "/a-propos/contact/page": "app/a-propos/contact/page.js",
+  "/page": "app/page.js",
+  "/profil/page": "app/profil/page.js"
 }

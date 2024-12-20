@@ -59,7 +59,7 @@ export default function ContactForm() {
 
   return (
     <div className=" h-screen w-screen">
-      <Header />
+      
       {/* Vidéo en arrière-plan */}
       <video
         className="absolute top-0 left-0 h-full w-full object-cover"
@@ -243,7 +243,7 @@ export default function ContactForm() {
     Message envoyé avec succès !
   </div>
 )}
-    <Footer />
+    
     </div>
   );
 }
