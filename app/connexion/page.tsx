@@ -1,7 +1,7 @@
 "use client";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import React, { useState } from "react";
-import { useAuth } from '@/src/hooks/useAuth';
+import { useAuth } from "@/src/hooks/useAuth";
 import { useRouter, useSearchParams } from "next/navigation";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -15,7 +15,7 @@ export default function Connexion() {
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
   const searchParams = useSearchParams();
-  const returnUrl = searchParams.get('returnUrl') || '/';
+  const returnUrl = searchParams.get("returnUrl") || "/";
   const { login } = useAuth();
 
   const togglePasswordVisibility = () => {
@@ -42,14 +42,14 @@ export default function Connexion() {
         setError(data.message);
       } else {
         if (!data.user?.name || !data.token) {
-          throw new Error('Données de connexion invalides');
+          throw new Error("Données de connexion invalides");
         }
 
         const userData = {
           name: data.user.name,
-          email: data.user.email
+          email: data.user.email,
         };
-        
+
         login(userData, data.token);
         toast.success(`Bonjour, ${userData.name} !`);
         router.push(decodeURIComponent(returnUrl));
@@ -114,7 +114,9 @@ export default function Connexion() {
                   className="absolute right-3 top-1/2 transform -translate-y-1/2 text-green-600"
                 >
                   <i
-                    className={`fas ${showPassword ? "fa-eye-slash" : "fa-eye"}`}
+                    className={`fas ${
+                      showPassword ? "fa-eye-slash" : "fa-eye"
+                    }`}
                   ></i>
                 </button>
               </div>

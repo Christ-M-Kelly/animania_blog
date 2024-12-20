@@ -1,6 +1,11 @@
+import { handleUpload } from "@/app/upload/uploadActions";
+import jwt from "jsonwebtoken";
 import { NextResponse } from "next/server";
 import { prisma } from "@/app/db/prisma";
-import { handleUpload } from "@/app/upload/uploadActions";
+
+interface DecodedToken {
+  id: string;
+}
 
 export async function POST(request: Request) {
   try {
@@ -9,6 +14,8 @@ export async function POST(request: Request) {
     const content = formData.get("content") as string;
     const published = formData.get("published") === "true";
     const image = formData.get("image") as File;
+
+    console.log("Données reçues:", { title, content, published, image });
 
     if (!title || !content) {
       return NextResponse.json(
@@ -38,11 +45,34 @@ export async function POST(request: Request) {
       }
     }
 
-    const user = await prisma.user.findFirst();
+    const token = request.headers.get("Authorization")?.split(" ")[1];
+    let userId: string | null = null;
+
+    if (token) {
+      try {
+        const decoded = jwt.verify(
+          token,
+          process.env.JWT_SECRET as string
+        ) as DecodedToken;
+        userId = decoded.id;
+      } catch (error) {
+        console.error("Erreur de vérification du token:", error);
+        return NextResponse.json({ error: "Token invalide" }, { status: 401 });
+      }
+    }
+
+    if (!userId) {
+      return NextResponse.json(
+        { error: "Utilisateur non authentifié" },
+        { status: 401 }
+      );
+    }
+
+    const user = await prisma.user.findUnique({ where: { id: userId } });
     if (!user) {
       return NextResponse.json(
         { error: "Aucun utilisateur trouvé" },
-        { status: 400 }
+        { status: 404 }
       );
     }
 
