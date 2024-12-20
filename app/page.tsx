@@ -2,6 +2,7 @@ import Header from "../src/components/Header";
 import Footer from "../src/components/Footer";
 import { prisma } from "./db/prisma";
 import Link from "next/link";
+import WeeklyAnimalBanner from "../src/components/WeeklyAnimalBanner";
 
 export default async function Home() {
   const posts = await prisma.post.findMany({
@@ -59,6 +60,9 @@ export default async function Home() {
             </div>
           </div>
         </section>
+
+        {/* Animal de la semaine */}
+        <WeeklyAnimalBanner />
 
         {/* Section Articles */}
         <section id="articles" className="bg-gray-100 py-16">

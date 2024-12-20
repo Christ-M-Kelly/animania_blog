@@ -11,7 +11,21 @@ const compat = new FlatCompat();
 
 export default [
   { files: ["**/*.{js,mjs,cjs,ts,jsx,tsx}"] },
-  { languageOptions: { parserOptions: { ecmaFeatures: { jsx: true } } } },
+  {
+    languageOptions: {
+      parserOptions: {
+        ecmaFeatures: { jsx: true },
+        ecmaVersion: 2022,
+      },
+    },
+  },
+  {
+    settings: {
+      react: {
+        version: "18.3.1",
+      },
+    },
+  },
   { languageOptions: { globals: globals.browser } },
   pluginJs.configs.recommended,
   // Tailwind
