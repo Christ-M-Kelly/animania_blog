@@ -23,17 +23,33 @@ export default function Connexion() {
       });
 
       const result = await response.json();
-      if (response.ok) {
-        toast.success("Connexion réussie !");
-        setTimeout(() => {
-          window.location.href = "http://localhost:3000"; // Redirection
-        }, 2000);
+
+      if (response.ok && result.token) {
+        console.log("Connexion réussie");
+        console.log("Données utilisateur reçues:", result.user);
+
+        // Stockage des informations utilisateur dans le localStorage
+        localStorage.setItem("user", JSON.stringify(result.user));
+        console.log("Données utilisateur stockées dans localStorage");
+
+        // Forcer la mise à jour du header
+        window.dispatchEvent(new Event("storage"));
+        window.dispatchEvent(new Event("userLogin"));
+        console.log("Événements de mise à jour déclenchés");
+
+        // Afficher le toast et rediriger immédiatement
+        toast.success("Connexion réussie", {
+          onClose: () => {
+            window.location.href = "/";
+          },
+          autoClose: 1000,
+        });
       } else {
-        toast.error(result.error || "Une erreur est survenue.");
+        toast.error(result.error || "Email ou mot de passe incorrect");
       }
     } catch (error) {
       console.error("Erreur lors de la connexion :", error);
-      toast.error("Erreur lors de la connexion.");
+      toast.error("Erreur lors de la connexion. Veuillez réessayer.");
     }
   };
 

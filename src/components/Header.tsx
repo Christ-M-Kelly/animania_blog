@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { jwtDecode } from "jwt-decode";
 import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
 
@@ -10,33 +9,128 @@ interface HeaderProps {
   className?: string;
 }
 
-// Ajouter cette interface
-interface DecodedToken {
-  exp: number;
-}
-
-// Ajouter cette interface pour définir la structure du menu
 interface MenuItem {
   name: string;
   href: string;
-  subMenu?: {
-    name: string;
-    href: string;
-  }[];
+  subMenu?: SubMenuItem[];
 }
 
+interface SubMenuItem {
+  name: string;
+  href: string;
+}
+
+interface User {
+  name: string;
+  email: string;
+  role: string;
+}
+
+const menu_navigation: MenuItem[] = [
+  {
+    name: "Accueil",
+    href: "/",
+  },
+  {
+    name: "A propos",
+    href: "/a-propos",
+    subMenu: [
+      {
+        name: "Qui sommes-nous",
+        href: "/a-propos/qui-sommes-nous",
+      },
+      {
+        name: "Notre équipe",
+        href: "/a-propos/notre-equipe",
+      },
+      {
+        name: "Nous contacter",
+        href: "/a-propos/contact",
+      },
+    ],
+  },
+  {
+    name: "Articles",
+    href: "/articles",
+    subMenu: [
+      {
+        name: "Toutes les catégories",
+        href: "/articles",
+      },
+      {
+        name: "Animaux Marins",
+        href: "/articles/animaux-marins",
+      },
+      {
+        name: "Animaux Terrestres",
+        href: "/articles/animaux-terrestres",
+      },
+      {
+        name: "Animaux Aériens",
+        href: "/articles/animaux-aerien",
+      },
+      {
+        name: "Animaux d'eau douce",
+        href: "/articles/animaux-d-eau-douce",
+      },
+    ],
+  },
+  {
+    name: "Galerie",
+    href: "/galerie",
+  },
+];
+
 export default function Header({ className }: HeaderProps) {
-  const [isClient, setIsClient] = useState(false);
   const [activeSubMenu, setActiveSubMenu] = useState<string | null>(null);
   const [lastClickTime, setLastClickTime] = useState(0);
   const pathname = usePathname();
+  const [user, setUser] = useState<User | null>(null);
 
+  // Effet pour vérifier l'état de connexion
   useEffect(() => {
-    setIsClient(true);
+    const checkAuth = () => {
+      if (typeof window === "undefined") return;
+
+      try {
+        const storedUser = localStorage.getItem("user");
+        console.log("Vérification du localStorage:", storedUser);
+
+        if (storedUser) {
+          const parsedUser = JSON.parse(storedUser);
+          console.log("Utilisateur trouvé:", parsedUser);
+          setUser(parsedUser);
+        } else {
+          console.log("Aucun utilisateur trouvé dans le localStorage");
+          setUser(null);
+        }
+      } catch (error) {
+        console.error("Erreur lors de la vérification:", error);
+        setUser(null);
+      }
+    };
+
+    // Vérifier immédiatement
+    checkAuth();
+
+    // Écouter les événements
+    if (typeof window !== "undefined") {
+      window.addEventListener("storage", checkAuth);
+      window.addEventListener("userLogin", checkAuth);
+      window.addEventListener("load", checkAuth);
+
+      return () => {
+        window.removeEventListener("storage", checkAuth);
+        window.removeEventListener("userLogin", checkAuth);
+        window.removeEventListener("load", checkAuth);
+      };
+    }
   }, []);
 
   // Gestionnaire de clic à l'extérieur amélioré
   useEffect(() => {
+    if (typeof window === "undefined") return;
+
     const handleClickOutside = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
       if (
@@ -56,111 +150,29 @@ export default function Header({ className }: HeaderProps) {
     e.preventDefault();
     const currentTime = new Date().getTime();
 
-    if (!link.subMenu) {
+    if (!link.subMenu?.length) {
       window.location.href = link.href;
       return;
     }
 
-    // Double-clic détection (300ms d'intervalle)
     if (currentTime - lastClickTime < 300 && activeSubMenu === link.name) {
-      // Navigation sur double-clic rapide
       window.location.href = link.href;
       setActiveSubMenu(null);
     } else if (activeSubMenu === link.name) {
-      // Simple clic sur menu ouvert : fermer le menu
       setActiveSubMenu(null);
     } else {
-      // Simple clic sur menu fermé : ouvrir le menu
       setActiveSubMenu(link.name);
     }
 
     setLastClickTime(currentTime);
   };
 
-  // Fonction pour vérifier si le token est valide
-  const isTokenValid = () => {
-    if (!isClient) return false;
-    const token = localStorage.getItem("token");
-    if (token) {
-      try {
-        const decodedToken: DecodedToken = jwtDecode(token);
-        const currentTime = Math.floor(Date.now() / 1000);
-        return decodedToken.exp > currentTime;
-      } catch {
-        return false;
-      }
-    }
-    return false;
-  };
-
-  const user = isClient
-    ? JSON.parse(localStorage.getItem("user") || "null")
-    : null;
-  const userName = user?.name || "Utilisateur";
-
-  // Vérification de l'état de l'authentification
-  const isAuthenticated = isTokenValid();
-
-  const menu_navigation = [
-    {
-      name: "Accueil",
-      href: "/",
-    },
-    {
-      name: "A propos",
-      href: "/a-propos",
-      subMenu: [
-        {
-          name: "Qui sommes-nous",
-          href: "/a-propos/qui-sommes-nous",
-        },
-        {
-          name: "Notre équipe",
-          href: "/a-propos/notre-equipe",
-        },
-        {
-          name: "Nous contacter",
-          href: "/a-propos/contact",
-        },
-      ],
-    },
-    {
-      name: "Articles",
-      href: "/articles",
-      subMenu: [
-        {
-          name: "Toutes les catégories",
-          href: "/articles",
-        },
-        {
-          name: "Animaux Marins",
-          href: "/articles/animaux-marins",
-        },
-        {
-          name: "Animaux Terrestres",
-          href: "/articles/animaux-terrestres",
-        },
-        {
-          name: "Animaux Aériens  ",
-          href: "/articles/animaux-aerien",
-        },
-        {
-          name: "Animaux d'eau douce",
-          href: "/articles/animaux-d-eau-douce",
-        },
-      ],
-    },
-    {
-      name: "Galerie",
-      href: "/galerie",
-    },
-  ];
-
   // Fonction de déconnexion
   const handleLogout = () => {
+    document.cookie = "token=; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT";
     localStorage.removeItem("user");
-    localStorage.removeItem("token");
-    window.location.reload(); // Recharger la page pour mettre à jour l'interface
+    setUser(null);
+    window.location.reload();
   };
 
   const isActivePath = (href: string) => {
@@ -169,6 +181,9 @@ export default function Header({ className }: HeaderProps) {
     }
     return pathname.startsWith(href);
   };
+
+  // Le reste du code reste identique...
+  // ... existing code ...
 
   return (
     <header
@@ -223,11 +238,9 @@ export default function Header({ className }: HeaderProps) {
                   </Link>
                   {link.subMenu && activeSubMenu === link.name && (
                     <div
-                      className={`
-                        absolute left-0 w-64 bg-white/95 backdrop-blur-sm rounded-lg shadow-lg py-2
+                      className="absolute left-0 w-64 bg-white/95 backdrop-blur-sm rounded-lg shadow-lg py-2
                         border-t-2 border-amber-500/50 transform origin-top-left transition-all duration-200 
-                        ease-out animate-dropdownFade mt-4 z-50
-                      `}
+                        ease-out animate-dropdownFade mt-4 z-50"
                       style={{
                         marginTop: "1.25rem",
                         boxShadow:
@@ -238,7 +251,7 @@ export default function Header({ className }: HeaderProps) {
                       aria-labelledby={`${link.name}-menu`}
                     >
                       <div className="absolute top-0 left-0 w-full h-4 -translate-y-full bg-transparent" />
-                      {link.subMenu.map((subLink, index) => (
+                      {link.subMenu?.map((subLink, index) => (
                         <Link
                           key={subLink.name}
                           href={subLink.href}
@@ -247,7 +260,7 @@ export default function Header({ className }: HeaderProps) {
                             transition-all duration-200 group/item relative
                             ${index === 0 ? "rounded-t-lg" : ""}
                             ${
-                              index === link.subMenu.length - 1
+                              index === (link.subMenu?.length ?? 0) - 1
                                 ? "rounded-b-lg"
                                 : ""
                             }
@@ -276,7 +289,7 @@ export default function Header({ className }: HeaderProps) {
 
         {/* Barre de recherche et utilisateur */}
         <div className="flex items-center space-x-4">
-          {isAuthenticated ? (
+          {user ? (
             <>
               <div className="relative group">
                 <button
@@ -290,7 +303,7 @@ export default function Header({ className }: HeaderProps) {
                     );
                   }}
                 >
-                  <span>{`Bonjour, ${userName}`}</span>
+                  <span>{`Bonjour, ${user.name}`}</span>
                   <span
                     className={`text-[10px] transition-transform duration-200 ${
                       activeSubMenu === "userMenu" ? "rotate-180" : ""

@@ -7,7 +7,7 @@ const animals = [
     name: "Lion",
     description:
       "Le roi majestueux de la savane africaine, symbole de force et de leadership dans le règne animal.",
-    imageUrl: "/images/weekly/lion.jpg",
+    imageUrl: "/images/weekly/lionn.jpg",
     category: "TERRESTRES",
     funFact:
       "Un rugissement de lion peut être entendu jusqu'à 8 kilomètres de distance !",
@@ -17,7 +17,7 @@ const animals = [
     name: "Dauphin",
     description:
       "L'acrobate intelligent des océans, connu pour sa sociabilité et son intelligence remarquable.",
-    imageUrl: "/images/weekly/dolphin.jpg",
+    imageUrl: "/images/weekly/dauphin.jpg",
     category: "MARINS",
     funFact: "Les dauphins dorment avec une moitié de leur cerveau éveillée !",
   },
@@ -35,7 +35,7 @@ const animals = [
     name: "Axolotl",
     description:
       "La salamandre souriante des lacs mexicains, capable de régénérer ses organes.",
-    imageUrl: "/images/weekly/axolotl.jpg",
+    imageUrl: "/images/weekly/axolotl.webp",
     category: "EAU_DOUCE",
     funFact: "Il peut régénérer son cerveau, son cœur et d'autres organes !",
   },
@@ -139,6 +139,7 @@ export default function WeeklyAnimalBanner() {
                   src={selectedAnimal.imageUrl}
                   alt={selectedAnimal.name}
                   fill
+                  sizes="(max-width: 768px) 100vw, 50vw"
                   style={{ objectFit: "cover", objectPosition: "center" }}
                   priority
                   className="transform hover:scale-105 transition-transform duration-700"
