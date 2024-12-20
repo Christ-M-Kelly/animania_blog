@@ -2,9 +2,14 @@ import Header from "../src/components/Header";
 import Footer from "../src/components/Footer";
 import { prisma } from "./db/prisma";
 import Link from "next/link";
+import WeeklyAnimalBanner from "../src/components/WeeklyAnimalBanner";
 
 export default async function Home() {
   const posts = await prisma.post.findMany({
+    take: 3,
+    orderBy: {
+      createdAt: "desc",
+    },
     select: {
       id: true,
       createdAt: true,
@@ -56,6 +61,9 @@ export default async function Home() {
           </div>
         </section>
 
+        {/* Animal de la semaine */}
+        <WeeklyAnimalBanner />
+
         {/* Section Articles */}
         <section id="articles" className="bg-gray-100 py-16">
           <div className="container mx-auto px-4">
@@ -68,7 +76,9 @@ export default async function Home() {
                   <div className="bg-white shadow-md rounded-lg overflow-hidden hover:shadow-lg transition-shadow duration-300 flex flex-col cursor-pointer">
                     <div className="aspect-[16/9] relative overflow-hidden bg-gray-100 p-4 flex items-center justify-center">
                       <img
-                        src={post.imageUrl || "https://via.placeholder.com/300x180"}
+                        src={
+                          post.imageUrl || "https://via.placeholder.com/300x180"
+                        }
                         alt={post.title}
                         className="max-h-[200px] w-auto object-contain"
                       />
@@ -76,11 +86,14 @@ export default async function Home() {
                     <div className="p-6 flex-1 flex flex-col">
                       <div className="flex justify-between items-center mb-2">
                         <div className="text-green-600 font-semibold text-sm uppercase">
-                          {new Date(post.createdAt).toLocaleDateString("fr-FR", {
-                            year: "numeric",
-                            month: "long",
-                            day: "numeric",
-                          })}
+                          {new Date(post.createdAt).toLocaleDateString(
+                            "fr-FR",
+                            {
+                              year: "numeric",
+                              month: "long",
+                              day: "numeric",
+                            }
+                          )}
                         </div>
                         <div className="text-gray-600 text-sm">
                           Par {post.author.name}
@@ -89,9 +102,10 @@ export default async function Home() {
                       <h3 className="text-xl font-bold text-green-500 mb-3 hover:text-green-600 transition-colors duration-300">
                         {post.title}
                       </h3>
-                      <div className="prose max-w-none text-gray-600 line-clamp-3">
-                        {post.content}
-                      </div>
+                      <div
+                        className="prose max-w-none text-gray-600 line-clamp-3"
+                        dangerouslySetInnerHTML={{ __html: post.content }}
+                      />
                     </div>
                   </div>
                 </Link>
