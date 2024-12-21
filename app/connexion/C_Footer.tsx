@@ -1,6 +1,5 @@
 import React from "react";
 import Link from "next/link";
-import Image from "next/image";
 
 interface NavLink {
   name: string;
@@ -15,38 +14,48 @@ export default function C_Footer() {
   ];
 
   return (
-    <footer className="bg-gradient-to-b from-green-700 to-green-900 py-6 fixed bottom-0 w-full">
-      <div className="container mx-auto px-4">
-        <div className="flex flex-row items-center justify-between">
-          <Link
-            href="/"
-            className="flex items-center space-x-3 hover:opacity-90 transition-opacity"
-          >
-            <Image
-              src="/images/logo_rbg.png"
-              alt="Logo Animania - Où chaque créature raconte une histoire"
-              width={60}
-              height={60}
-              className="rounded-full border-2 border-green-700 shadow-lg hover:scale-105 transition-transform duration-300 bg-white"
-            />
-            <h3 className="text-xl font-bold text-white font-serif">
-              Animania
-            </h3>
-          </Link>
-          <nav>
-            <ul className="flex flex-row space-x-6">
-              {navLinks.map((link) => (
-                <li key={link.name}>
-                  <Link
-                    href={link.href}
-                    className="text-gray-300 hover:text-green-300 hover:underline transition-colors duration-200"
-                  >
-                    {link.name}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </nav>
+    <footer className="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black/95 via-green-950/40 to-transparent backdrop-blur-sm">
+      <div className="container mx-auto px-8 py-8">
+        <div className="flex flex-col md:flex-row justify-between items-center space-y-6 md:space-y-0 border-t border-gray-100/10 pt-6">
+          <div className="flex items-center space-x-6 md:pl-4">
+            {navLinks.map((link) => (
+              <Link
+                key={link.name}
+                href={link.href}
+                className="text-gray-100 hover:text-white transition-colors duration-200 text-sm hover:scale-105 transform"
+              >
+                {link.name}
+              </Link>
+            ))}
+          </div>
+          <div className="flex-1 flex justify-center">
+            <div className="flex items-center space-x-10">
+              <a
+                href="#"
+                className="text-gray-100 hover:text-white transition-all duration-200 transform hover:scale-110 hover:rotate-6"
+                aria-label="Facebook"
+              >
+                <i className="fab fa-facebook text-xl"></i>
+              </a>
+              <a
+                href="#"
+                className="text-gray-100 hover:text-white transition-all duration-200 transform hover:scale-110 hover:-rotate-6"
+                aria-label="Twitter"
+              >
+                <i className="fab fa-twitter text-xl"></i>
+              </a>
+              <a
+                href="#"
+                className="text-gray-100 hover:text-white transition-all duration-200 transform hover:scale-110 hover:rotate-6"
+                aria-label="Instagram"
+              >
+                <i className="fab fa-instagram text-xl"></i>
+              </a>
+            </div>
+          </div>
+          <div className="text-gray-100/80 text-sm font-light tracking-wider md:pr-4">
+            © 2024 Animania. Tous droits réservés.
+          </div>
         </div>
       </div>
     </footer>

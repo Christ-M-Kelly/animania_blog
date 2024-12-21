@@ -1,9 +1,8 @@
 {
-  "/api/Post/route": "app/api/Post/route.js",
-  "/_not-found/page": "app/_not-found/page.js",
-  "/profil/formulaire_post/page": "app/profil/formulaire_post/page.js",
-  "/galerie/page": "app/galerie/page.js",
+  "/api/auth/login/route": "app/api/auth/login/route.js",
   "/page": "app/page.js",
   "/connexion/page": "app/connexion/page.js",
-  "/articles/animaux-marins/page": "app/articles/animaux-marins/page.js"
+  "/formulaire_inscription/page": "app/formulaire_inscription/page.js",
+  "/posts/[id]/page": "app/posts/[id]/page.js",
+  "/articles/page": "app/articles/page.js"
 }
