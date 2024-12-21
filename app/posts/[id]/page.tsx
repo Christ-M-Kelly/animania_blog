@@ -4,7 +4,11 @@ import Header from "@/src/components/Header";
 import Footer from "@/src/components/Footer";
 import Link from "next/link";
 import CommentSection from "@/src/components/CommentSection";
+<<<<<<< HEAD
 import FormattedDate from "@/src/components/FormattedDate";
+=======
+import FormattedDate from "@/src/components/ui/FormattedDate";
+>>>>>>> 108f84205b2fb17193a7c96d7ac6c52f3878318b
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser, faClock } from "@fortawesome/free-solid-svg-icons";
 

@@ -82,6 +82,9 @@ export default function FormulairePage() {
     setLoading(true);
 
     try {
+      const token = localStorage.getItem("token");
+      console.log("Token récupéré:", token);
+
       const formData = new FormData();
       formData.append("title", title);
       formData.append("content", editor?.getHTML() || "");
@@ -91,15 +94,21 @@ export default function FormulairePage() {
         formData.append("image", file);
       }
 
+      console.log("Catégorie sélectionnée:", category);
+
+      console.log("Données envoyées:", formData);
+
       const response = await fetch("/api/Post", {
         method: "POST",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
         body: formData,
       });
 
       if (!response.ok) {
-        throw new Error(
-          `Erreur HTTP: ${response.status} ${response.statusText}`
-        );
+        const errorData = await response.json();
+        throw new Error(`Erreur HTTP: ${response.status} ${errorData.error}`);
       }
 
       toast.success(
@@ -114,6 +123,12 @@ export default function FormulairePage() {
     } catch (error) {
       console.error("Erreur détaillée:", error);
       toast.error("Une erreur est survenue lors de la publication.");
+<<<<<<< HEAD
+=======
+      if (error instanceof Error) {
+        console.error("Message d'erreur:", error.message);
+      }
+>>>>>>> 108f84205b2fb17193a7c96d7ac6c52f3878318b
     } finally {
       setLoading(false);
     }

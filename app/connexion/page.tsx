@@ -2,15 +2,33 @@
 
 import { useState } from "react";
 import "@fortawesome/fontawesome-free/css/all.min.css";
+<<<<<<< HEAD
+=======
+import React, { useState } from "react";
+import { useAuth } from "@/src/hooks/useAuth";
+import { useRouter, useSearchParams } from "next/navigation";
+>>>>>>> 108f84205b2fb17193a7c96d7ac6c52f3878318b
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Link from "next/link";
 
 export default function Connexion() {
+<<<<<<< HEAD
   const [formData, setFormData] = useState({
     email: "",
     password: "",
   });
+=======
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const returnUrl = searchParams.get("returnUrl") || "/";
+  const { login } = useAuth();
+>>>>>>> 108f84205b2fb17193a7c96d7ac6c52f3878318b
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -45,7 +63,22 @@ export default function Connexion() {
           autoClose: 1000,
         });
       } else {
+<<<<<<< HEAD
         toast.error(result.error || "Email ou mot de passe incorrect");
+=======
+        if (!data.user?.name || !data.token) {
+          throw new Error("Données de connexion invalides");
+        }
+
+        const userData = {
+          name: data.user.name,
+          email: data.user.email,
+        };
+
+        login(userData, data.token);
+        toast.success(`Bonjour, ${userData.name} !`);
+        router.push(decodeURIComponent(returnUrl));
+>>>>>>> 108f84205b2fb17193a7c96d7ac6c52f3878318b
       }
     } catch (error) {
       console.error("Erreur lors de la connexion :", error);
@@ -101,6 +134,7 @@ export default function Connexion() {
               >
                 Mot de passe
               </label>
+<<<<<<< HEAD
               <input
                 type="password"
                 id="password"
@@ -111,6 +145,30 @@ export default function Connexion() {
                 required
                 className="mt-1 block w-full px-3 py-2.5 rounded-xl bg-white/15 border border-emerald-100/30 focus:border-emerald-300 focus:ring-2 focus:ring-emerald-200/50 transition-all duration-200 text-emerald-50 placeholder-emerald-200/50 text-sm hover:bg-white/20"
               />
+=======
+              <div className="relative">
+                <input
+                  type={showPassword ? "text" : "password"}
+                  id="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  className="mt-1 block w-full px-3 sm:px-4 py-2 sm:py-3 rounded-lg border-2 border-green-100 focus:border-green-500 focus:ring-2 focus:ring-green-200 transition-all duration-200 text-sm sm:text-base"
+                  required
+                  placeholder="••••••••"
+                />
+                <button
+                  type="button"
+                  onClick={togglePasswordVisibility}
+                  className="absolute right-3 top-1/2 transform -translate-y-1/2 text-green-600"
+                >
+                  <i
+                    className={`fas ${
+                      showPassword ? "fa-eye-slash" : "fa-eye"
+                    }`}
+                  ></i>
+                </button>
+              </div>
+>>>>>>> 108f84205b2fb17193a7c96d7ac6c52f3878318b
             </div>
             <button
               type="submit"

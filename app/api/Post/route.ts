@@ -1,8 +1,16 @@
+import { handleUpload } from "@/app/upload/uploadActions";
+import jwt from "jsonwebtoken";
 import { NextResponse } from "next/server";
 import { prisma } from "@/app/db/prisma";
+<<<<<<< HEAD
 import { handleUpload } from "@/app/upload/uploadActions";
+=======
+>>>>>>> 108f84205b2fb17193a7c96d7ac6c52f3878318b
 import { AnimalCategory } from "@prisma/client";
 
+interface DecodedToken {
+  id: string;
+}
 export async function POST(request: Request) {
   try {
     const formData = await request.formData();
@@ -11,6 +19,17 @@ export async function POST(request: Request) {
     const published = formData.get("published") === "true";
     const image = formData.get("image") as File;
     const category = formData.get("category") as AnimalCategory;
+<<<<<<< HEAD
+=======
+
+    console.log("Données reçues:", {
+      title,
+      content,
+      published,
+      image,
+      category,
+    });
+>>>>>>> 108f84205b2fb17193a7c96d7ac6c52f3878318b
 
     if (!title || !content) {
       return NextResponse.json(
@@ -40,19 +59,45 @@ export async function POST(request: Request) {
       }
     }
 
-    const user = await prisma.user.findFirst();
+    const token = request.headers.get("Authorization")?.split(" ")[1];
+    let userId: string | null = null;
+
+    if (token) {
+      try {
+        const decoded = jwt.verify(
+          token,
+          process.env.JWT_SECRET as string
+        ) as DecodedToken;
+        userId = decoded.id;
+      } catch (error) {
+        console.error("Erreur de vérification du token:", error);
+        return NextResponse.json({ error: "Token invalide" }, { status: 401 });
+      }
+    }
+
+    if (!userId) {
+      return NextResponse.json(
+        { error: "Utilisateur non authentifié" },
+        { status: 401 }
+      );
+    }
+
+    const user = await prisma.user.findUnique({ where: { id: userId } });
     if (!user) {
       return NextResponse.json(
         { error: "Aucun utilisateur trouvé" },
-        { status: 400 }
+        { status: 404 }
       );
     }
+
+    console.log("Catégorie reçue:", category);
 
     const post = await prisma.post.create({
       data: {
         title,
         content,
         published,
+        category,
         imageUrl: imagePath,
         category,
         slug: title.toLowerCase().replace(/ /g, "-") + "-" + Date.now(),

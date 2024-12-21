@@ -1,5 +1,9 @@
 import { prisma } from "@/app/db/prisma";
+<<<<<<< HEAD
 import ArticleCard from "@/src/components/ArticleCard";
+=======
+import ArticleCard from "@/src/components/ui/ArticleCard";
+>>>>>>> 108f84205b2fb17193a7c96d7ac6c52f3878318b
 import Header from "@/src/components/Header";
 import Footer from "@/src/components/Footer";
 import { AnimalCategory } from "@prisma/client";

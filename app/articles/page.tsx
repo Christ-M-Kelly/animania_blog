@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 import { prisma } from "@/lib/prisma";
+=======
+import { prisma } from "@/app/db/prisma";
+>>>>>>> 108f84205b2fb17193a7c96d7ac6c52f3878318b
 import Link from "next/link";
 import Header from "../../src/components/Header";
 import Footer from "../../src/components/Footer";

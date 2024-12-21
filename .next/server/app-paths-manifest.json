@@ -1,3 +1,13 @@
 {
+<<<<<<< HEAD
   "/page": "app/page.js"
+=======
+  "/api/Post/route": "app/api/Post/route.js",
+  "/_not-found/page": "app/_not-found/page.js",
+  "/profil/formulaire_post/page": "app/profil/formulaire_post/page.js",
+  "/galerie/page": "app/galerie/page.js",
+  "/page": "app/page.js",
+  "/connexion/page": "app/connexion/page.js",
+  "/articles/animaux-marins/page": "app/articles/animaux-marins/page.js"
+>>>>>>> 108f84205b2fb17193a7c96d7ac6c52f3878318b
 }

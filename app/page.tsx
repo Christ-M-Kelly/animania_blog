@@ -2,7 +2,11 @@ import Header from "../src/components/Header";
 import Footer from "../src/components/Footer";
 import { prisma } from "./db/prisma";
 import Link from "next/link";
+<<<<<<< HEAD
 import WeeklyAnimalBanner from "../src/components/WeeklyAnimalBanner";
+=======
+import WeeklyAnimalBanner from "@/src/components/ui/WeeklyAnimalBanner";
+>>>>>>> 108f84205b2fb17193a7c96d7ac6c52f3878318b
 
 export default async function Home() {
   const posts = await prisma.post.findMany({

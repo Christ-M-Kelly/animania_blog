@@ -128,6 +128,7 @@ export default function GalleryClient({ items }: { items: GalleryItem[] }) {
         <div className="absolute inset-0 bg-gradient-to-r from-green-600 to-green-800">
           <div className="absolute inset-0 opacity-30">
             <div className="absolute inset-0 bg-[url('/images/pattern.png')] bg-repeat opacity-20 animate-slide"></div>
+<<<<<<< HEAD
             {items.slice(0, 6).map((item, index) => {
               const topPosition = (index * 17 + 13) % 100;
               const leftPosition = (index * 23 + 7) % 100;
@@ -163,6 +164,38 @@ export default function GalleryClient({ items }: { items: GalleryItem[] }) {
                 </motion.div>
               );
             })}
+=======
+            {items.slice(0, 6).map((item, index) => (
+              <motion.div
+                key={item.id}
+                className="absolute w-24 h-24 md:w-32 md:h-32 rounded-lg overflow-hidden opacity-20 transform rotate-12 blur-sm"
+                initial={{ y: 0 }}
+                animate={{
+                  y: [-20, 20],
+                  x: [-10, 10],
+                  rotate: [12, 8, 12],
+                }}
+                transition={{
+                  duration: 5 + index,
+                  repeat: Infinity,
+                  repeatType: "reverse",
+                  ease: "easeInOut",
+                }}
+                style={{
+                  top: `${Math.random() * 100}%`,
+                  left: `${Math.random() * 100}%`,
+                }}
+              >
+                <Image
+                  src={item.imageUrl}
+                  alt=""
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 96px, 128px"
+                />
+              </motion.div>
+            ))}
+>>>>>>> 108f84205b2fb17193a7c96d7ac6c52f3878318b
           </div>
         </div>
 
@@ -296,7 +329,11 @@ export default function GalleryClient({ items }: { items: GalleryItem[] }) {
       </div>
 
       {/* Le reste du composant reste inchangé */}
+<<<<<<< HEAD
       <style jsx global>{`
+=======
+      <style>{`
+>>>>>>> 108f84205b2fb17193a7c96d7ac6c52f3878318b
         @keyframes float {
           0%,
           100% {
@@ -317,6 +354,10 @@ export default function GalleryClient({ items }: { items: GalleryItem[] }) {
         .animate-slide {
           animation: slide 20s linear infinite;
         }
+<<<<<<< HEAD
+=======
+        /* Ajoutez d'autres styles globaux ici si nécessaire */
+>>>>>>> 108f84205b2fb17193a7c96d7ac6c52f3878318b
       `}</style>
 
       {/* Grille Masonry */}

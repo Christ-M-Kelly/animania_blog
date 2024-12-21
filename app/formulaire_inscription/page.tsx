@@ -24,15 +24,22 @@ export default function Formulaire() {
         body: JSON.stringify(formData),
       });
 
-      const result = await response.json();
-      if (response.ok) {
-        toast.success("Utilisateur créé avec succès !");
-        setTimeout(() => {
-          window.location.href = "http://localhost:3000"; // Redirection
-        }, 2000);
-      } else {
-        toast.error(result.error || "Une erreur est survenue.");
+      const responseData = await response.text();
+      console.log("Statut de la réponse:", response.status);
+      console.log("Réponse du serveur:", responseData);
+
+      if (!response.ok) {
+        throw new Error(`Erreur HTTP: ${response.status} ${responseData}`);
       }
+
+      const result = JSON.parse(responseData);
+
+      console.log("Utilisateur créé:", result.user);
+
+      toast.success("Utilisateur créé avec succès !");
+      setTimeout(() => {
+        window.location.href = "http://localhost:3000"; // Redirection
+      }, 2000);
     } catch (error) {
       console.error("Erreur lors de la soumission :", error);
       toast.error("Erreur lors de l'envoi des données.");
