@@ -11,22 +11,22 @@
       "static/chunks/main-app.js",
       "static/chunks/app/page.js"
     ],
+    "/profil/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/css/app/profil/page.css",
+      "static/chunks/app/profil/page.js"
+    ],
+    "/api/use/route": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/api/use/route.js"
+    ],
     "/connexion/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
       "static/css/app/connexion/page.css",
       "static/chunks/app/connexion/page.js"
-    ],
-    "/formulaire_inscription/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/css/app/formulaire_inscription/page.css",
-      "static/chunks/app/formulaire_inscription/page.js"
-    ],
-    "/api/users/route": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/api/users/route.js"
     ],
     "/api/auth/login/route": [
       "static/chunks/webpack.js",
@@ -38,15 +38,15 @@
       "static/chunks/main-app.js",
       "static/chunks/app/posts/[id]/page.js"
     ],
-    "/api/comments/route": [
+    "/galerie/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/api/comments/route.js"
+      "static/chunks/app/galerie/page.js"
     ],
-    "/profil/page": [
+    "/_not-found/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/profil/page.js"
+      "static/chunks/app/_not-found/page.js"
     ]
   }
 }
