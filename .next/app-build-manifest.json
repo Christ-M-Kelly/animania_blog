@@ -23,6 +23,11 @@
       "static/css/app/formulaire_inscription/page.css",
       "static/chunks/app/formulaire_inscription/page.js"
     ],
+    "/api/users/route": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/api/users/route.js"
+    ],
     "/api/auth/login/route": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
@@ -33,10 +38,15 @@
       "static/chunks/main-app.js",
       "static/chunks/app/posts/[id]/page.js"
     ],
-    "/articles/page": [
+    "/api/comments/route": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/articles/page.js"
+      "static/chunks/app/api/comments/route.js"
+    ],
+    "/profil/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/profil/page.js"
     ]
   }
 }

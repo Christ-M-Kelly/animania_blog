@@ -4,45 +4,54 @@ import { useState } from "react";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import Link from "next/link";
-
+import C_Footer from "../connexion/C_Footer";
 export default function Formulaire() {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     password: "",
-    role: "USER",
+    passwordConfirmation: "",
   });
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
+    if (formData.password !== formData.passwordConfirmation) {
+      toast.error("Les mots de passe ne correspondent pas.");
+      return;
+    }
+
     try {
       const response = await fetch("/api/users", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          password: formData.password,
+          role: "USER", // Par défaut, définissez le rôle ici
+        }),
       });
 
       const responseData = await response.text();
-      console.log("Statut de la réponse:", response.status);
-      console.log("Réponse du serveur:", responseData);
 
       if (!response.ok) {
-        throw new Error(`Erreur HTTP: ${response.status} ${responseData}`);
+        throw new Error(`Erreur: ${responseData}`);
       }
 
       const result = JSON.parse(responseData);
 
-      console.log("Utilisateur créé:", result.user);
+      console.log("Résultat de la création de l'utilisateur:", result);
 
-      toast.success("Utilisateur créé avec succès !");
+      toast.success(`Bienvenue ${result.name} !`);
       setTimeout(() => {
-        window.location.href = "http://localhost:3000"; // Redirection
+        window.location.href = "/connexion";
       }, 2000);
     } catch (error) {
       console.error("Erreur lors de la soumission :", error);
-      toast.error("Erreur lors de l'envoi des données.");
+      const message =
+        (error as Error).message || "Erreur lors de l'envoi des données.";
+      toast.error(message);
     }
   };
 
@@ -127,26 +136,21 @@ export default function Formulaire() {
             </div>
             <div>
               <label
-                htmlFor="role"
+                htmlFor="passwordConfirmation"
                 className="block text-sm font-medium text-amber-200 mb-1.5"
               >
-                Rôle
+                Confirmer le mot de passe
               </label>
-              <select
-                id="role"
-                name="role"
-                value={formData.role}
+              <input
+                type="password"
+                id="passwordConfirmation"
+                name="passwordConfirmation"
+                value={formData.passwordConfirmation}
                 onChange={handleChange}
+                placeholder="••••••••"
                 required
-                className="mt-1 block w-full px-3 py-2.5 rounded-xl bg-white/10 border border-amber-200/20 focus:border-amber-400 focus:ring-2 focus:ring-amber-300/40 transition-all duration-200 text-amber-100 text-sm"
-              >
-                <option value="USER" className="bg-amber-900 text-amber-100">
-                  Utilisateur
-                </option>
-                <option value="ADMIN" className="bg-amber-900 text-amber-100">
-                  Administrateur
-                </option>
-              </select>
+                className="mt-1 block w-full px-3 py-2.5 rounded-xl bg-white/10 border border-amber-200/20 focus:border-amber-400 focus:ring-2 focus:ring-amber-300/40 transition-all duration-200 text-amber-100 placeholder-amber-300/50 text-sm"
+              />
             </div>
             <button
               type="submit"
@@ -156,57 +160,8 @@ export default function Formulaire() {
             </button>
           </form>
         </div>
-
-        <div className="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black/95 via-amber-950/40 to-transparent backdrop-blur-sm">
-          <div className="container mx-auto px-8 py-8">
-            <div className="flex flex-col md:flex-row justify-between items-center space-y-6 md:space-y-0 border-t border-amber-100/10 pt-6">
-              <div className="flex items-center space-x-6 md:pl-4">
-                <Link
-                  href="/"
-                  className="text-amber-100 hover:text-white transition-colors duration-200 text-sm hover:scale-105 transform"
-                >
-                  Accueil
-                </Link>
-                <span className="text-amber-100/30">•</span>
-                <Link
-                  href="/connexion"
-                  className="text-amber-100 hover:text-white transition-colors duration-200 text-sm hover:scale-105 transform"
-                >
-                  Connexion
-                </Link>
-              </div>
-              <div className="flex-1 flex justify-center">
-                <div className="flex items-center space-x-10">
-                  <a
-                    href="#"
-                    className="text-amber-100 hover:text-white transition-all duration-200 transform hover:scale-110 hover:rotate-6"
-                    aria-label="Facebook"
-                  >
-                    <i className="fab fa-facebook text-xl"></i>
-                  </a>
-                  <a
-                    href="#"
-                    className="text-amber-100 hover:text-white transition-all duration-200 transform hover:scale-110 hover:-rotate-6"
-                    aria-label="Twitter"
-                  >
-                    <i className="fab fa-twitter text-xl"></i>
-                  </a>
-                  <a
-                    href="#"
-                    className="text-amber-100 hover:text-white transition-all duration-200 transform hover:scale-110 hover:rotate-6"
-                    aria-label="Instagram"
-                  >
-                    <i className="fab fa-instagram text-xl"></i>
-                  </a>
-                </div>
-              </div>
-              <div className="text-amber-100/80 text-sm font-light tracking-wider md:pr-4">
-                © 2024 Animania. Tous droits réservés.
-              </div>
-            </div>
-          </div>
-        </div>
       </main>
+      <C_Footer />
     </div>
   );
 }

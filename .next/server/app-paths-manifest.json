@@ -1,8 +1,9 @@
 {
   "/api/auth/login/route": "app/api/auth/login/route.js",
-  "/page": "app/page.js",
+  "/api/comments/route": "app/api/comments/route.js",
   "/connexion/page": "app/connexion/page.js",
+  "/page": "app/page.js",
   "/formulaire_inscription/page": "app/formulaire_inscription/page.js",
   "/posts/[id]/page": "app/posts/[id]/page.js",
-  "/articles/page": "app/articles/page.js"
+  "/profil/page": "app/profil/page.js"
 }
