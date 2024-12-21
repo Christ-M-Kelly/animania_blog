@@ -2,11 +2,11 @@ import { handleUpload } from "@/app/upload/uploadActions";
 import jwt from "jsonwebtoken";
 import { NextResponse } from "next/server";
 import { prisma } from "@/app/db/prisma";
+import { AnimalCategory } from "@prisma/client";
 
 interface DecodedToken {
   id: string;
 }
-
 export async function POST(request: Request) {
   try {
     const formData = await request.formData();
@@ -14,8 +14,15 @@ export async function POST(request: Request) {
     const content = formData.get("content") as string;
     const published = formData.get("published") === "true";
     const image = formData.get("image") as File;
+    const category = formData.get("category") as AnimalCategory;
 
-    console.log("Données reçues:", { title, content, published, image });
+    console.log("Données reçues:", {
+      title,
+      content,
+      published,
+      image,
+      category,
+    });
 
     if (!title || !content) {
       return NextResponse.json(
@@ -76,11 +83,14 @@ export async function POST(request: Request) {
       );
     }
 
+    console.log("Catégorie reçue:", category);
+
     const post = await prisma.post.create({
       data: {
         title,
         content,
         published,
+        category,
         imageUrl: imagePath,
         slug: title.toLowerCase().replace(/ /g, "-") + "-" + Date.now(),
         author: {

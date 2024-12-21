@@ -94,6 +94,8 @@ export default function FormulairePage() {
         formData.append("image", file);
       }
 
+      console.log("Catégorie sélectionnée:", category);
+
       console.log("Données envoyées:", formData);
 
       const response = await fetch("/api/Post", {
