@@ -22,15 +22,10 @@
       "static/chunks/main-app.js",
       "static/chunks/app/articles/page.js"
     ],
-    "/articles/animaux-terrestres/page": [
+    "/posts/[id]/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/articles/animaux-terrestres/page.js"
-    ],
-    "/articles/animaux-aerien/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/articles/animaux-aerien/page.js"
+      "static/chunks/app/posts/[id]/page.js"
     ],
     "/connexion/page": [
       "static/chunks/webpack.js",
@@ -39,22 +34,15 @@
       "app/connexion/page.css",
       "static/chunks/app/connexion/page.js"
     ],
-    "/profil/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/profil/page.js"
-    ],
-    "/formulaire_inscription/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/css/app/formulaire_inscription/page.css",
-      "app/formulaire_inscription/page.css",
-      "static/chunks/app/formulaire_inscription/page.js"
-    ],
     "/api/auth/login/route": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
       "static/chunks/app/api/auth/login/route.js"
+    ],
+    "/profil/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/profil/page.js"
     ],
     "/_not-found/page": [
       "static/chunks/webpack.js",
